@@ -10,8 +10,7 @@
     <header>
         <h1>Inventariado</h1>
         <nav>
-            <a href="index.php?controller=item&action=index">Items</a>
-            <a href="index.php?controller=item&action=create">Add Item</a>
+            <a href="index.php?controller=ubicacion&action=index">Ubicacion</a>
         </nav>
     </header>
     <main>

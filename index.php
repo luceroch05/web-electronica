@@ -1,5 +1,15 @@
 <?php
+require_once 'controllers/CategoriaController.php';
+require_once 'controllers/ProfesorController.php';
+require_once 'controllers/DetalleReservaItemController.php';
 require_once 'controllers/ItemController.php';
+require_once 'controllers/PrestamoController.php';
+require_once 'controllers/ReservaController.php';
+require_once 'controllers/RolController.php';
+require_once 'controllers/SalonController.php';
+require_once 'controllers/UbicacionController.php';
+require_once 'controllers/UnidadDidacticaController.php';
+require_once 'controllers/UsuarioController.php';
 
 $controller = isset($_GET['controller']) ? $_GET['controller'] : 'item';
 $action = isset($_GET['action']) ? $_GET['action'] : 'index';
