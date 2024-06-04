@@ -11,7 +11,7 @@ switch ($controller) {
 
         case 'profesor':
             $controller = new ProfesorController();
-            break;
+        break;
     case 'curso':
             $controller= new CursoController();
     case 'categoria':
