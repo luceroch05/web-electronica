@@ -1,7 +1,7 @@
 <?php
 require_once 'controllers/CategoriaController.php';
 require_once 'controllers/ProfesorController.php';
-require_once 'controllers/detalle_reserva_item.php';
+require_once 'controllers/DetalleReservaItemController.php';
 require_once 'controllers/ItemController.php';
 require_once 'controllers/PrestamoController.php';
 require_once 'controllers/ReservaController.php';
