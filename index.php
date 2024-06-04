@@ -8,8 +8,7 @@ switch ($controller) {
     case 'item':
         $controller = new ItemController();
         break;
-
-        case 'profesor':
+    case 'profesor':
             $controller = new ProfesorController();
         break;
     case 'curso':
@@ -32,11 +31,39 @@ switch ($controller) {
         $controller=new RolController();
     case 'detalle':
         $controller=new DetalleReservaItemController();
-            // Otros controladores
+
 }
 
+switch ($action) {
 
-$controller->{$action}();
+    case 'index' :
+    $controller->index();
+    break;
+
+    case 'edit':
+    $id = $_GET['id'];
+    $controller->edit($id);
+    break;
+
+    case 'create':
+    $controller->create();
+     break;
+
+    case 'update':
+    $id = $_GET['id'];
+    $controller->update($id);
+    break; 
+
+    case 'store':
+    $controller->store();
+    break;
+
+    case 'delete':
+    $id = $_GET['id'];
+    $controller->delete($id);
+    break;
+
+}
 
 
 ?>
