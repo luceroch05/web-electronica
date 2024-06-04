@@ -1,7 +1,11 @@
 <?php
 require_once 'controllers/CategoriaController.php';
 require_once 'controllers/ProfesorController.php';
+<<<<<<< HEAD
 require_once 'controllers/DetalleReservaItemController.php';
+=======
+require_once 'controllers/DetalleReservaItem.php';
+>>>>>>> c07627430495589f82e1f711c275d0c6b3591229
 require_once 'controllers/ItemController.php';
 require_once 'controllers/PrestamoController.php';
 require_once 'controllers/ReservaController.php';
