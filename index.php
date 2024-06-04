@@ -11,70 +11,92 @@ require_once 'controllers/UbicacionController.php';
 require_once 'controllers/UnidadDidacticaController.php';
 require_once 'controllers/UsuarioController.php';
 
-$controller = isset($_GET['controller']) ? $_GET['controller'] : 'item';
+$controllerName = isset($_GET['controller']) ? $_GET['controller'] : 'item';
 $action = isset($_GET['action']) ? $_GET['action'] : 'index';
 
-switch ($controller) {
+// Crear instancia del controlador según el parámetro 'controller'
+switch ($controllerName) {
     case 'item':
         $controller = new ItemController();
         break;
     case 'profesor':
-            $controller = new ProfesorController();
+        $controller = new ProfesorController();
         break;
     case 'curso':
-            $controller= new CursoController();
+        $controller = new CursoController();
+        break;
     case 'categoria':
-            $controller=new CategoriaController();
+        $controller = new CategoriaController();
+        break;
     case 'prestamo':
-        $controller=new PrestamoController(); 
+        $controller = new PrestamoController(); 
+        break;
     case 'reserva':
-        $controller=new ReservaController();
+        $controller = new ReservaController();
+        break;
     case 'ubicacion':
-        $controller=new UbicacionController();
+        $controller = new UbicacionController();
+        break;
     case 'salon':
-        $controller= new SalonController();
+        $controller = new SalonController();
+        break;
     case 'unidad_didactica':
-        $controller=new UnidadDidacticaController();
+        $controller = new UnidadDidacticaController();
+        break;
     case 'usuario':
-        $controller=new UsuarioController();           
+        $controller = new UsuarioController();           
+        break;
     case 'rol':
-        $controller=new RolController();
+        $controller = new RolController();
+        break;
     case 'detalle':
-        $controller=new DetalleReservaItemController();
-
+        $controller = new DetalleReservaItemController();
+        break;
+    default:
+        // Controlador predeterminado en caso de que no se proporcione uno válido en la URL
+        $controller = new ItemController();
 }
 
+// Ejecutar la acción correspondiente en el controlador
 switch ($action) {
-
-    case 'index' :
-    $controller->index();
-    break;
-
+    case 'index':
+        $controller->index();
+        break;
     case 'edit':
-    $id = $_GET['id'];
-    $controller->edit($id);
-    break;
-
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $controller->edit($id);
+        } else {
+            // Manejar el caso en el que no se proporciona un ID
+            // Aquí puedes redirigir a una página de error o hacer otra acción apropiada
+        }
+        break;
     case 'create':
-    $controller->create();
-     break;
-
+        $controller->create();
+        break;
     case 'update':
-    $id = $_GET['id'];
-    $controller->update($id);
-    break; 
-
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $controller->update($id);
+        } else {
+            // Manejar el caso en el que no se proporciona un ID
+            // Aquí puedes redirigir a una página de error o hacer otra acción apropiada
+        }
+        break;
     case 'store':
-    $controller->store();
-    break;
-
+        $controller->store();
+        break;
     case 'delete':
-    $id = $_GET['id'];
-    $controller->delete($id);
-    break;
-
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $controller->delete($id);
+        } else {
+            // Manejar el caso en el que no se proporciona un ID
+            // Aquí puedes redirigir a una página de error o hacer otra acción apropiada
+        }
+        break;
+    default:
+        // Manejar casos de acción no válidos
+        // Aquí puedes redirigir a una página de error o hacer otra acción apropiada
 }
-
-
 ?>
-
