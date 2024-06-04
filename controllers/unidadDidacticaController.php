@@ -5,18 +5,18 @@ class UnidadDidacticaController {
 
     public function index() {
         $unidadesDidacticas = UnidadDidactica::all();
-        $view = 'views/unidades_didacticas/index.php';
+        $view = 'views/unidad_didactica/index.php';
         require_once 'views/layout.php';
     }
 
     public function show($id) {
         $unidadDidactica = UnidadDidactica::find($id);
-        $view = 'views/unidades_didacticas/show.php';
+        $view = 'views/unidad_didactica/show.php';
         require_once 'views/layout.php';
     }
 
     public function create() {
-        $view = 'views/unidades_didacticas/create.php';
+        $view = 'views/unidad_didactica/create.php';
         require_once 'views/layout.php';
     }
 
@@ -35,7 +35,7 @@ class UnidadDidacticaController {
 
     public function edit($id) {
         $unidadDidactica = UnidadDidactica::find($id);
-        $view = 'views/unidades_didacticas/edit.php';
+        $view = 'views/unidad_didactica/edit.php';
         require_once 'views/layout.php';
     }
 

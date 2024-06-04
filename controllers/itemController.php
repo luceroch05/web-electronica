@@ -5,18 +5,18 @@ class ItemController {
 
     public function index() {
         $items = Item::all();
-        $view = 'views/items/index.php';
+        $view = 'views/item/index.php';
         require_once 'views/layout.php';
     }
 
     public function show($id) {
         $item = Item::find($id);
-        $view = 'views/items/show.php';
+        $view = 'views/item/show.php';
         require_once 'views/layout.php';
     }
 
     public function create() {
-        $view = 'views/items/create.php';
+        $view = 'views/item/create.php';
         require_once 'views/layout.php';
     }
 
@@ -44,7 +44,7 @@ class ItemController {
 
     public function edit($id) {
         $item = Item::find($id);
-        $view = 'views/items/edit.php';
+        $view = 'views/item/edit.php';
         require_once 'views/layout.php';
     }
 

@@ -11,6 +11,7 @@
         <h1>Inventariado</h1>
         <nav>
             <a href="index.php?controller=ubicacion&action=index">Ubicacion</a>
+            <a href="index.php?controller=salon&action=index">Ubicacion</a>
         </nav>
     </header>
     <main>

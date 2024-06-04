@@ -5,18 +5,18 @@ class UsuarioController {
 
     public function index() {
         $usuarios = Usuario::all();
-        $view = 'views/usuarios/index.php';
+        $view = 'views/usuario/index.php';
         require_once 'views/layout.php';
     }
 
     public function show($id) {
         $usuario = Usuario::find($id);
-        $view = 'views/usuarios/show.php';
+        $view = 'views/usuario/show.php';
         require_once 'views/layout.php';
     }
 
     public function create() {
-        $view = 'views/usuarios/create.php';
+        $view = 'views/usuario/create.php';
         require_once 'views/layout.php';
     }
 
@@ -35,7 +35,7 @@ class UsuarioController {
 
     public function edit($id) {
         $usuario = Usuario::find($id);
-        $view = 'views/usuarios/edit.php';
+        $view = 'views/usuario/edit.php';
         require_once 'views/layout.php';
     }
 
