@@ -5,18 +5,18 @@ class SalonController {
 
     public function index() {
         $salones = Salon::all();
-        $view = 'views/salones/index.php';
+        $view = 'views/salon/index.php';
         require_once 'views/layout.php';
     }
 
     public function show($id) {
         $salon = Salon::find($id);
-        $view = 'views/salones/show.php';
+        $view = 'views/salon/show.php';
         require_once 'views/layout.php';
     }
 
     public function create() {
-        $view = 'views/salones/create.php';
+        $view = 'views/salon/create.php';
         require_once 'views/layout.php';
     }
 
@@ -33,7 +33,7 @@ class SalonController {
 
     public function edit($id) {
         $salon = Salon::find($id);
-        $view = 'views/salones/edit.php';
+        $view = 'views/salon/edit.php';
         require_once 'views/layout.php';
     }
 

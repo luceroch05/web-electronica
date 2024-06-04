@@ -11,12 +11,12 @@ class CategoriaController {
 
     public function show($id) {
         $categoria = Categoria::find($id);
-        $view = 'views/categorias/show.php';
+        $view = 'views/categoria/show.php';
         require_once 'views/layout.php';
     }
 
     public function create() {
-        $view = 'views/categorias/create.php';
+        $view = 'views/categoria/create.php';
         require_once 'views/layout.php';
     }
 
@@ -33,7 +33,7 @@ class CategoriaController {
 
     public function edit($id) {
         $categoria = Categoria::find($id);
-        $view = 'views/categorias/edit.php';
+        $view = 'views/categoria/edit.php';
         require_once 'views/layout.php';
     }
 

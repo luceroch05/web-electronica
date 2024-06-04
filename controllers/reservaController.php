@@ -5,18 +5,18 @@ class ReservaController {
 
     public function index() {
         $reservas = Reserva::all();
-        $view = 'views/reservas/index.php';
+        $view = 'views/reservA/index.php';
         require_once 'views/layout.php';
     }
 
     public function show($id) {
         $reserva = Reserva::find($id);
-        $view = 'views/reservas/show.php';
+        $view = 'views/reserva/show.php';
         require_once 'views/layout.php';
     }
 
     public function create() {
-        $view = 'views/reservas/create.php';
+        $view = 'views/reserva/create.php';
         require_once 'views/layout.php';
     }
 
@@ -36,7 +36,7 @@ class ReservaController {
 
     public function edit($id) {
         $reserva = Reserva::find($id);
-        $view = 'views/reservas/edit.php';
+        $view = 'views/reserva/edit.php';
         require_once 'views/layout.php';
     }
 

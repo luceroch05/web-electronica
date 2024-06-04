@@ -5,18 +5,18 @@ class ProfesorController {
 
     public function index() {
         $profesores = Profesor::all();
-        $view = 'views/profesores/index.php';
+        $view = 'views/profesor/index.php';
         require_once 'views/layout.php';
     }
 
     public function show($id) {
         $profesor = Profesor::find($id);
-        $view = 'views/profesores/show.php';
+        $view = 'views/profesor/show.php';
         require_once 'views/layout.php';
     }
 
     public function create() {
-        $view = 'views/profesores/create.php';
+        $view = 'views/profesor/create.php';
         require_once 'views/layout.php';
     }
 
@@ -33,7 +33,7 @@ class ProfesorController {
 
     public function edit($id) {
         $profesor = Profesor::find($id);
-        $view = 'views/profesores/edit.php';
+        $view = 'views/profesor/edit.php';
         require_once 'views/layout.php';
     }
 

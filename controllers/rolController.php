@@ -5,18 +5,18 @@ class RolController {
 
     public function index() {
         $roles = Rol::all();
-        $view = 'views/roles/index.php';
+        $view = 'views/rol/index.php';
         require_once 'views/layout.php';
     }
 
     public function show($id) {
         $rol = Rol::find($id);
-        $view = 'views/roles/show.php';
+        $view = 'views/rol/show.php';
         require_once 'views/layout.php';
     }
 
     public function create() {
-        $view = 'views/roles/create.php';
+        $view = 'views/rol/create.php';
         require_once 'views/layout.php';
     }
 
@@ -33,7 +33,7 @@ class RolController {
 
     public function edit($id) {
         $rol = Rol::find($id);
-        $view = 'views/roles/edit.php';
+        $view = 'views/rol/edit.php';
         require_once 'views/layout.php';
     }
 

@@ -5,18 +5,18 @@ class PrestamoController {
 
     public function index() {
         $prestamos = Prestamo::all();
-        $view = 'views/prestamos/index.php';
+        $view = 'views/prestamo/index.php';
         require_once 'views/layout.php';
     }
 
     public function show($id) {
         $prestamo = Prestamo::find($id);
-        $view = 'views/prestamos/show.php';
+        $view = 'views/prestamo/show.php';
         require_once 'views/layout.php';
     }
 
     public function create() {
-        $view = 'views/prestamos/create.php';
+        $view = 'views/prestamo/create.php';
         require_once 'views/layout.php';
     }
 
@@ -35,7 +35,7 @@ class PrestamoController {
 
     public function edit($id) {
         $prestamo = Prestamo::find($id);
-        $view = 'views/prestamos/edit.php';
+        $view = 'views/prestamo/edit.php';
         require_once 'views/layout.php';
     }
 
