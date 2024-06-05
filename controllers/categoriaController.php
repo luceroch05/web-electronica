@@ -5,7 +5,7 @@ class CategoriaController {
 
     public function index() {
         $categorias = Categoria::all();
-        $view = 'views/categorias/index.php';
+        $view = 'views/categoria/index.php';
         require_once 'views/layout.php';
     }
 

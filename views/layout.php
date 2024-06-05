@@ -17,6 +17,7 @@
             <a href="index.php?controller=prestamo&action=index">Prestamo</a>
             <a href="index.php?controller=profesor&action=index">Profesor</a>
             <a href="index.php?controller=reserva&action=index">Reserva</a>
+            <a href="index.php?controller=categoria&action=index">Categoria</a>
 
         </nav>
     </header>
