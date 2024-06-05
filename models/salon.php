@@ -15,13 +15,13 @@ class Salon{
         stmt->execute();
         return $stmt->get_result()->fetch_assoc();
     }
-
     public static function create($data){
         global $conexion;
-        $stmt=$conexion->prepare("INSERT INTO salon(nombre_salon VALUES (?)");
-        $stmt->bind_param("s",$data['nombre_salon']);
-        stmt->execute();
-    }
+        $stmt = $conexion->prepare("INSERT INTO salon(nombre_salon) VALUES (?)");
+        $stmt->bind_param("s", $data['nombre_salon']);
+        $stmt->execute();
+    }    
+
     public static function update($id, $data) {
         global $conexion;
         $stmt = $conexion->prepare("UPDATE salon SET  nombre_salon=? WHERE id_salon = ?");

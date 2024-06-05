@@ -12,6 +12,8 @@
         <nav>
             <a href="index.php?controller=ubicacion&action=index">Ubicacion</a>
             <a href="index.php?controller=salon&action=index">Salones</a>
+            <a href="index.php?controller=categoria&action=index">Categoria</a>
+
         </nav>
     </header>
     <main>

@@ -22,14 +22,20 @@ class SalonController {
 
     public function store() {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $data = [
-                'nombre_salon' => $_POST['nombre_salon']
-            ];
-            Salon::create($data);
-            header('Location: index.php?controller=salon&action=index');
-            exit;
+            if (empty($_POST['nombre_salon'])) {
+                $error_nombre = 'Por favor, ingrese un nombre para el salón.';
+            } else {
+                $data = [
+                    'nombre_salon' => $_POST['nombre_salon']
+                ];
+                Salon::create($data);
+                header('Location: index.php?controller=salon&action=index');
+                exit;
+            }
         }
+        // Resto del código para mostrar el formulario y los errores
     }
+    
 
     public function edit($id) {
         $salon = Salon::find($id);

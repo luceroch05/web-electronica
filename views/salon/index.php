@@ -1,3 +1,5 @@
+<a href="index.php?controller=salon&action=create" class="btn btn-primary mb-3">Agregar Salon</a>
+
 <table>
     <thead>
         <tr>
@@ -9,8 +11,8 @@
         <?php if (!empty($salones)): ?>
             <?php foreach ($salones as $salon): ?>
                 <tr>
-                    <td><?php echo $item['id_salon']; ?></td>
-                    <td><?php echo $item['Nombre']; ?></td>
+                    <td><?php echo $salon['id_salon']; ?></td>
+                    <td><?php echo $salon['nombre_salon']; ?></td>
                     </td>
                 </tr>
             <?php endforeach; ?>
