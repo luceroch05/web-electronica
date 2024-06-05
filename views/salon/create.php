@@ -1,8 +1,10 @@
-<h1>Crear salon</h1>
+<div class="container">
+    <h2>Crear Salón</h2>
     <form action="index.php?controller=salon&action=store" method="POST">
-        <label for="nombre_salon">Nombre:</label>
-        <input type="text" id="nombre_salon" name="nombre_salon" required><br>
-
-        <input type="submit" value="Crear">
+        <div class="form-group">
+            <label for="nombre_salon">Nombre del Salón:</label>
+            <input type="text" class="form-control" id="nombre_salon" name="nombre_salon" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Crear Salón</button>
     </form>
-    <a href="index.php?controller=salon&action=index">Volver a las lista de salones</a>
+</div>

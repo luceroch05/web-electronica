@@ -33,7 +33,7 @@ class CategoriaController {
 
     public function edit($id) {
         $categoria = Categoria::find($id);
-        $view = 'views/categoria/edit.php';
+        $view = 'views/categoria/update.php';
         require_once 'views/layout.php';
     }
 

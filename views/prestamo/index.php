@@ -8,7 +8,9 @@
 
             <li class="list-group-item d-flex justify-content-between align-items-center">
 
-                <?php echo $ubicacion['Nombre']; ?>
+                <?php echo $prestamo['id_prestamo']; ?>
+                <?php echo $prestamo['fecha_prestamo']; ?>
+                <?php echo $prestamo['hora_prestamo']; ?>
 
                 <span>
                     <a href="index.php?controller=prestamo&action=edit&id=<?php echo $prestamo['id_prestamo']; ?>" class="btn btn-sm btn-warning">Editar</a>
