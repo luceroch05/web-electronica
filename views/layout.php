@@ -18,6 +18,9 @@
             <a href="index.php?controller=profesor&action=index">Profesor</a>
             <a href="index.php?controller=reserva&action=index">Reserva</a>
             <a href="index.php?controller=categoria&action=index">Categoria</a>
+            <a href="index.php?controller=unidad_didactica&action=index">Unidad Didactica</a>
+            <a href="index.php?controller=usuario&action=index">Usuario</a>
+            <a href="index.php?controller=rol&action=index">Rol</a>
 
         </nav>
     </header>
