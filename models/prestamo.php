@@ -39,6 +39,5 @@ class Prestamo {
     }
 }
 
-// Initialize the connection once when the class is first used
 Prestamo::init();
 ?>
