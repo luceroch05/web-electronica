@@ -13,6 +13,7 @@
                 <tr>
                     <td><?php echo $salon['id_salon']; ?></td>
                     <td><?php echo $salon['nombre_salon']; ?></td>
+                    <td><a href="index.php?controller=salon&action=edit&id=<?php echo $salon['id_salon']; ?>" class="btn btn-primary">Editar</a></td>
                     </td>
                 </tr>
             <?php endforeach; ?>

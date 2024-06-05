@@ -11,8 +11,8 @@ class Salon{
     public static function find($id){
         global $conexion;
         $stmt=$conexion->prepare("SELECT * FROM salon WHERE id_salon=?");
-        stmt->bind_param("i",$id);
-        stmt->execute();
+        $stmt->bind_param("i",$id);
+        $stmt->execute();
         return $stmt->get_result()->fetch_assoc();
     }
     public static function create($data){
@@ -25,7 +25,7 @@ class Salon{
     public static function update($id, $data) {
         global $conexion;
         $stmt = $conexion->prepare("UPDATE salon SET  nombre_salon=? WHERE id_salon = ?");
-        $stmt->bind_param("ssisssssii",$data['nombre_saloin'], $id);
+        $stmt->bind_param("si",$data['nombre_salon'], $id);
         $stmt->execute();
     }
 
