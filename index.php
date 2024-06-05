@@ -49,7 +49,7 @@ switch ($controllerName) {
     case 'rol':
         $controller = new RolController();
         break;
-    case 'detalle':
+    case 'detalle_reserva_item':
         $controller = new DetalleReservaItemController();
         break;
     default:
