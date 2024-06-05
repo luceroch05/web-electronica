@@ -6,8 +6,8 @@
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 <?php echo $categoria['nombre_categoria']; ?>
                 <span>
-                    <a href="index.php?controller=categoria&action=edit&id=<?php echo $curso['id_categoria']; ?>" class="btn btn-sm btn-warning">Editar</a>
-                    <a href="index.php?controller=categoria&action=delete&id=<?php echo $curso['id_categoria']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro?')">Eliminar</a>
+                    <a href="index.php?controller=categoria&action=edit&id=<?php echo $categoria['id_categoria']; ?>" class="btn btn-sm btn-warning">Editar</a>
+                    <a href="index.php?controller=categoria&action=delete&id=<?php echo $categoria['id_categoria']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro?')">Eliminar</a>
                 </span>
             </li>
         <?php endforeach; ?>
