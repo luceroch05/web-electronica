@@ -6,7 +6,7 @@
 
         <?php foreach ($ubicaciones as $ubicacion): ?>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <?php echo $ubicacion['Nombre']; ?>
+                <?php echo $ubicacion['nombre_armario']; ?>
 
                 <span>
                     <a href="index.php?controller=curso&action=edit&id=<?php echo $curso['id_ubicacion']; ?>" class="btn btn-sm btn-warning">Editar</a>

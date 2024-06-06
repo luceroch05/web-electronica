@@ -16,6 +16,7 @@ class UbicacionController {
     }
 
     public function create() {
+        $salones = Salon::all();
         $view = 'views/ubicacion/create.php';
         require_once 'views/layout.php';
     }
