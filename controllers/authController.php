@@ -1,14 +1,13 @@
 <?php
-
 require_once 'models/usuario.php';
 
 class AuthController {
 
     public function login() {
-        // No necesitas verificar la sesión aquí, solo muestra el formulario de inicio de sesión
         $view = 'views/auth/login.php';
         require_once 'views/layout.php';
     }
+
 
     public function authenticate() {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -17,7 +16,8 @@ class AuthController {
     
             $user = Usuario::findByUsername($nombre_usuario);
     
-            if ($user && $password === $user['password']) { // No es necesario verificar con password_verify si las contraseñas no están hasheadas
+            if ($user && password_verify($password, $user['password'])) {
+                session_start();
                 $_SESSION['user_id'] = $user['id_usuario'];
                 $_SESSION['username'] = $user['nombre_usuario'];
                 $_SESSION['role'] = $user['id_rol'];
@@ -31,9 +31,12 @@ class AuthController {
             }
         }
     }
+    
+    
 
     public function logout() {
-        session_destroy(); // Solo necesitas destruir la sesión, no necesitas comenzarla nuevamente
+        session_start();
+        session_destroy();
         header('Location: index.php?controller=auth&action=login');
         exit;
     }

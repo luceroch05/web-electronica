@@ -1,17 +1,4 @@
 <?php
-session_start();    
-// Verificar si el usuario ya ha iniciado sesión
-if (!isset($_SESSION['user_id'])) {
-    // Si el usuario no ha iniciado sesión, mostrar el formulario de inicio de sesión y detener la ejecución
-    require_once 'controllers/AuthController.php';
-    $authController = new AuthController();
-    $authController->login();
-
-    // Detener la ejecución para que el resto del contenido no se muestre
-    exit;
-}
-
-
 require_once 'controllers/CategoriaController.php';
 require_once 'controllers/ProfesorController.php';
 require_once 'controllers/DetalleReservaItemController.php';
