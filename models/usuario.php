@@ -36,7 +36,25 @@ class Usuario {
         $stmt = self::$conexion->prepare("DELETE FROM usuario WHERE id_usuario = ?");
         $stmt->bind_param("i", $id);
         return $stmt->execute();
+
+
+
     }
+    
+    public static function findByUsername($usuario_nombre) {
+        $stmt = self::$conexion->prepare("SELECT * FROM usuario WHERE nombre_usuario = ?");
+        $stmt->bind_param("s", $usuario_nombre);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    
+        if ($result->num_rows === 0) {
+            return null; // No se encontró ningún usuario
+        } else {
+            return $result->fetch_assoc();
+        }
+    }
+    
+    
 }
 
 Usuario::init();

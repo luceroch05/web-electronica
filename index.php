@@ -1,4 +1,17 @@
 <?php
+session_start();    
+// Verificar si el usuario ya ha iniciado sesión
+if (!isset($_SESSION['user_id'])) {
+    // Si el usuario no ha iniciado sesión, mostrar el formulario de inicio de sesión y detener la ejecución
+    require_once 'controllers/AuthController.php';
+    $authController = new AuthController();
+    $authController->login();
+
+    // Detener la ejecución para que el resto del contenido no se muestre
+    exit;
+}
+
+
 require_once 'controllers/CategoriaController.php';
 require_once 'controllers/ProfesorController.php';
 require_once 'controllers/DetalleReservaItemController.php';
@@ -10,9 +23,12 @@ require_once 'controllers/SalonController.php';
 require_once 'controllers/UbicacionController.php';
 require_once 'controllers/UnidadDidacticaController.php';
 require_once 'controllers/UsuarioController.php';
+require_once 'controllers/AuthController.php';
 
-$controllerName = isset($_GET['controller']) ? $_GET['controller'] : 'item';
-$action = isset($_GET['action']) ? $_GET['action'] : 'index';
+require_once 'views/auth/login.php';
+
+$controllerName = isset($_GET['controller']) ? $_GET['controller'] : 'auth';
+$action = isset($_GET['action']) ? $_GET['action'] : 'login';
 
 // Crear instancia del controlador según el parámetro 'controller'
 switch ($controllerName) {
@@ -52,9 +68,14 @@ switch ($controllerName) {
     case 'detalle_reserva_item':
         $controller = new DetalleReservaItemController();
         break;
+
+        case 'auth':
+            $controller = new authController();
+            break;
+
+
     default:
         // Controlador predeterminado en caso de que no se proporcione uno válido en la URL
-        $controller = new ItemController();
 }
 
 // Ejecutar la acción correspondiente en el controlador
@@ -62,6 +83,7 @@ switch ($action) {
     case 'index':
         $controller->index();
         break;
+
     case 'edit':
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
@@ -71,9 +93,11 @@ switch ($action) {
             // Aquí puedes redirigir a una página de error o hacer otra acción apropiada
         }
         break;
+
     case 'create':
         $controller->create();
         break;
+
     case 'update':
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
@@ -86,16 +110,29 @@ switch ($action) {
     case 'store':
         $controller->store();
         break;
+
+    case 'authenticate':
+            $controller->authenticate();
+            break;
+
     case 'delete':
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
             $controller->delete($id);
+
         } else {
             // Manejar el caso en el que no se proporciona un ID
             // Aquí puedes redirigir a una página de error o hacer otra acción apropiada
         }
         break;
+
+
+        case 'login':
+
+            $controller->login();
+            break;
     default:
+
         // Manejar casos de acción no válidos
         // Aquí puedes redirigir a una página de error o hacer otra acción apropiada
 }

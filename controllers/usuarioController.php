@@ -22,16 +22,23 @@ class UsuarioController {
 
     public function store() {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $nombre_usuario = $_POST['nombre_usuario'];
+            $password = $_POST['password'];
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+            $id_rol = $_POST['id_rol'];
+    
             $data = [
-                'nombre_usuario' => $_POST['nombre_usuario'],
-                'password' => $_POST['password'],
-                'id_rol' => $_POST['id_rol']
+                'nombre_usuario' => $nombre_usuario,
+                'password' => $hashed_password, // Almacena la contraseña como hash
+                'id_rol' => $id_rol
             ];
+    
             Usuario::create($data);
             header('Location: index.php?controller=usuario&action=index');
             exit;
         }
     }
+    
 
     public function edit($id) {
         $usuario = Usuario::find($id);
