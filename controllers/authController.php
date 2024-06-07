@@ -4,8 +4,7 @@ require_once 'models/usuario.php';
 class AuthController {
 
     public function login() {
-        $view = 'views/auth/login.php';
-        require_once 'views/layout.php';
+        require_once 'views/login.php';
     }
 
 
@@ -26,14 +25,12 @@ class AuthController {
             } else {
                 // Mostrar un mensaje de error y redirigir al formulario de inicio de sesión
                 $error = "Invalid username or password";
-                $view = 'views/auth/login.php';
-                require_once 'views/layout.php';
+                require_once 'views/login.php';
             }
         }
     }
     
     
-
     public function logout() {
         session_start();
         session_destroy();

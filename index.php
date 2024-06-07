@@ -12,7 +12,6 @@ require_once 'controllers/UnidadDidacticaController.php';
 require_once 'controllers/UsuarioController.php';
 require_once 'controllers/AuthController.php';
 
-require_once 'views/auth/login.php';
 
 $controllerName = isset($_GET['controller']) ? $_GET['controller'] : 'auth';
 $action = isset($_GET['action']) ? $_GET['action'] : 'login';
