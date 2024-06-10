@@ -39,14 +39,9 @@
                             <a class="nav-link" href="index.php?controller=unidad_didactica&action=index">Unidad Didáctica</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="index.php?controller=usuario&action=index">Usuario</a>
+                            <a class="nav-link" href="index.php?controller=usuario&action=index">Usuarios</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.php?controller=rol&action=index">Rol</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.php?controller=item&action=index">Item</a>
-                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link" href="index.php?controller=detalle_reserva_item&action=index">Detalle Reserva Item</a>
                         </li>

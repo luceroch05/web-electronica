@@ -23,13 +23,17 @@ class UsuarioController {
     public function store() {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $nombre_usuario = $_POST['nombre_usuario'];
+            $nombre = $_POST['nombre'];
+            $apellidos = $_POST['apellidos'];
             $password = $_POST['password'];
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
             $id_rol = $_POST['id_rol'];
     
             $data = [
                 'nombre_usuario' => $nombre_usuario,
-                'password' => $hashed_password, // Almacena la contraseña como hash
+                'nombre' => $nombre,
+                'apellidos' => $apellidos,
+                'password' => $hashed_password,
                 'id_rol' => $id_rol
             ];
     
@@ -38,6 +42,7 @@ class UsuarioController {
             exit;
         }
     }
+    
     
 
     public function edit($id) {

@@ -19,16 +19,15 @@ class Usuario {
         $stmt->execute();
         return $stmt->get_result()->fetch_assoc();
     }
-
     public static function create($data) {
-        $stmt = self::$conexion->prepare("INSERT INTO usuario (nombre_usuario, password, id_rol) VALUES (?, ?, ?)");
-        $stmt->bind_param("ssi", $data['nombre_usuario'], $data['password'], $data['id_rol']);
+        $stmt = self::$conexion->prepare("INSERT INTO usuario (nombre_usuario, nombre, apellidos, password, id_rol) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssi", $data['nombre_usuario'], $data['nombre'], $data['apellidos'], $data['password'], $data['id_rol']);
         return $stmt->execute();
     }
 
     public static function update($id, $data) {
-        $stmt = self::$conexion->prepare("UPDATE usuario SET nombre_usuario = ?, password = ?, id_rol = ? WHERE id_usuario = ?");
-        $stmt->bind_param("ssii", $data['nombre_usuario'], $data['password'], $data['id_rol'], $id);
+        $stmt = self::$conexion->prepare("UPDATE usuario SET nombre_usuario = ?, nombre =?, apellidos=? , password = ?, id_rol = ? WHERE id_usuario = ?");
+        $stmt->bind_param("ssii", $data['nombre_usuario'],  $data['nombre'], $data['apellidos'], $data['password'], $data['id_rol'], $id);
         return $stmt->execute();
     }
 
