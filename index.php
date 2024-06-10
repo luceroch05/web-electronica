@@ -13,8 +13,8 @@ require_once 'controllers/UsuarioController.php';
 require_once 'controllers/AuthController.php';
 
 
-$controllerName = isset($_GET['controller']) ? $_GET['controller'] : 'auth';
-$action = isset($_GET['action']) ? $_GET['action'] : 'login';
+$controllerName = isset($_GET['controller']) ? $_GET['controller'] : 'item';
+$action = isset($_GET['action']) ? $_GET['action'] : 'index';
 
 // Crear instancia del controlador según el parámetro 'controller'
 switch ($controllerName) {

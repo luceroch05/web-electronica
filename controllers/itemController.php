@@ -12,7 +12,7 @@ class ItemController {
     public function show($id) {
         $item = Item::find($id);
         $view = 'views/item/show.php';
-        require_once 'views/layout.php';
+        require_once 'views/layout.php';    
     }
 
     public function create() {
