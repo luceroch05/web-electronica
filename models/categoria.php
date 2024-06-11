@@ -37,6 +37,22 @@ class Categoria {
         $stmt->bind_param("i", $id);
         return $stmt->execute();
     }
+
+    public static function getItemsByCategoria($id){
+        $stmt = self::$conexion->prepare("SELECT * FROM item WHERE id_categoria = ?");
+        $stmt->bind_param("i", $id);
+        if ($stmt->execute()) {
+            $result = $stmt->get_result();
+            $items = [];
+            while ($row = $result->fetch_assoc()) {
+                $items[] = $row;
+            }
+            return $items;
+        } else {
+            return []; 
+        }
+    }
+    
 }
 
 Categoria::init();
