@@ -1,22 +1,23 @@
 <?php
-require_once 'models/categoria.php';
+
+require_once 'models/item.php';
 
 class ItemController {
 
-    public function index() {
 
+    public function index() {
  // Obtener el parámetro de la categoría seleccionada
  $categoria_id = isset($_GET['categoria_id']) ? $_GET['categoria_id'] : null;
- $categoria = Categoria::getItemsByCategoria($categoria_id);
+ $item = Item::getItemsByCategoria($categoria_id);
 
- if ($categoria) {
-    // Obtener los items correspondientes a esta categoría
-    $items = Categoria::getItemsByCategoria($categoria_id);
-    // Renderizar la vista con los resultados
+ if ($item) {
+
+    $items = Item::getItemsByCategoria($categoria_id);
     $view = 'views/item/index.php';
     require_once 'views/layout.php';
-} else {
-    // La categoría no existe, mostrar un mensaje de error o redirigir a otra página
+
+}
+ else {
     echo "La categoría no existe.";
 }
 
