@@ -52,7 +52,7 @@
                 <option value="3">Profesor</option>
             </select>
         </div>
-        <button type="submit" class="btn btn-primary">Crear Usuario</button>
+        <button type="submit" class="btn btn-primary">Siguiente</button>
     </form>
 </div>
 

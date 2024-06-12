@@ -1,4 +1,6 @@
 <?php
+require_once 'models/item.php';
+
 require_once 'models/reserva.php';
 
 class ReservaController {
@@ -16,11 +18,17 @@ class ReservaController {
     }
 
     public function create() {
+        $items = Item::all();
+
         $view = 'views/reserva/create.php';
         require_once 'views/layout.php';
     }
 
     public function store() {
+
+        $items = Item::all();
+
+        
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $data = [
                 'fecha_reserva' => $_POST['fecha_reserva'],
@@ -29,6 +37,7 @@ class ReservaController {
                 'id_profesor' => $_POST['id_profesor']
             ];
             Reserva::create($data);
+
             header('Location: index.php?controller=reserva&action=index');
             exit;
         }

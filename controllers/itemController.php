@@ -5,25 +5,28 @@ require_once 'models/item.php';
 class ItemController {
 
 
+    public function todo() {
+        // Obtener el parámetro de la categoría seleccionada
+       
+        $view = 'views/item/index.php';
+           $items = Item::all();
+           require_once 'views/layout.php';
+       
+       
+       }
+       
+
+
     public function index() {
  // Obtener el parámetro de la categoría seleccionada
  $categoria_id = isset($_GET['categoria_id']) ? $_GET['categoria_id'] : null;
- $item = Item::getItemsByCategoria($categoria_id);
 
- if ($item) {
-
+ $view = 'views/item/index.php';
     $items = Item::getItemsByCategoria($categoria_id);
-    $view = 'views/item/index.php';
     require_once 'views/layout.php';
 
-}
- else {
-    echo "La categoría no existe.";
-}
-
 
 }
-
 
 
     public function show($id) {

@@ -13,11 +13,11 @@ require_once 'controllers/UsuarioController.php';
 require_once 'controllers/AuthController.php';
 
 
-$controllerName = isset($_GET['controller']) ? $_GET['controller'] : 'item';
+$controller = isset($_GET['controller']) ? $_GET['controller'] : 'categoria';
 $action = isset($_GET['action']) ? $_GET['action'] : 'index';
 
 // Crear instancia del controlador según el parámetro 'controller'
-switch ($controllerName) {
+switch ($controller) {
     case 'item':
         $controller = new ItemController();
         break;
@@ -55,7 +55,7 @@ switch ($controllerName) {
         $controller = new DetalleReservaItemController();
         break;
 
-        case 'auth':
+    case 'auth':
             $controller = new authController();
             break;
 
