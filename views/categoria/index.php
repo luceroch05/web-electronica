@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title"><?php echo $categoria['nombre_categoria']; ?></h5>
-                        <a href="index.php?controller=item&action=index&categoria_id=<?php echo $categoria['id_categoria']; ?>" class="btn btn-primary">Ver Items</a>
+                        <a href="index.php?controller=item&action=index&id_categoria=<?php echo $categoria['id_categoria']; ?>" class="btn btn-primary">Ver Items</a>
                         </div>
                 </div>
             </div>

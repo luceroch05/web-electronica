@@ -19,8 +19,8 @@ class ItemController {
 
     public function index() {
  // Obtener el parámetro de la categoría seleccionada
- $categoria_id = isset($_GET['categoria_id']) ? $_GET['categoria_id'] : null;
 
+ $categoria_id = isset($_GET['id_categoria']) ? $_GET['id_categoria'] : null;
  $view = 'views/item/index.php';
     $items = Item::getItemsByCategoria($categoria_id);
     require_once 'views/layout.php';
@@ -35,7 +35,10 @@ class ItemController {
         require_once 'views/layout.php';    
     }
 
+
     public function create() {
+        $categoria_id = isset($_GET['id_categoria']) ? $_GET['id_categoria'] : null;
+
         $view = 'views/item/create.php';
         require_once 'views/layout.php';
     }
