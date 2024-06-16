@@ -83,6 +83,9 @@ switch ($action) {
     case 'create':
         $controller->create();
         break;
+        case 'create_two':
+            $controller->create_two();
+            break;
 
     case 'update':
         if (isset($_GET['id'])) {
@@ -97,6 +100,9 @@ switch ($action) {
         $controller->store();
         break;
 
+        case 'store_two':
+            $controller->store_two();
+            break;
     case 'authenticate':
             $controller->authenticate();
             break;

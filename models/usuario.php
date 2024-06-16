@@ -19,10 +19,15 @@ class Usuario {
         $stmt->execute();
         return $stmt->get_result()->fetch_assoc();
     }
+
+    
     public static function create($data) {
         $stmt = self::$conexion->prepare("INSERT INTO usuario (nombre_usuario, nombre, apellidos, password, id_rol) VALUES (?, ?, ?, ?, ?)");
         $stmt->bind_param("ssssi", $data['nombre_usuario'], $data['nombre'], $data['apellidos'], $data['password'], $data['id_rol']);
-        return $stmt->execute();
+        $stmt->execute();
+        
+        // Devuelve el último ID insertado
+        return self::$conexion->insert_id;
     }
 
     public static function update($id, $data) {
@@ -52,7 +57,7 @@ class Usuario {
             return $result->fetch_assoc();
         }
     }
-    
+
     
 }
 

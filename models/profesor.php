@@ -19,10 +19,10 @@ class Profesor {
         $stmt->execute();
         return $stmt->get_result()->fetch_assoc();
     }
-
+    
     public static function create($data) {
-        $stmt = self::$conexion->prepare("INSERT INTO profesor (nombre) VALUES (?)");
-        $stmt->bind_param("s", $data['nombre']);
+        $stmt = self::$conexion->prepare("INSERT INTO profesor (id_usuario) VALUES (?)");
+        $stmt->bind_param("i", $data['id_usuario']);
         return $stmt->execute();
     }
 
