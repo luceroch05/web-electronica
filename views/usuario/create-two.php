@@ -11,7 +11,7 @@
 </head>
 <body>
 <div class="container mt-5">
-    <h2>Crear Usuario - Paso 2</h2>
+    <h2>Crear Usuario - Paso 2  idrol = <?php echo $_SESSION['id_rol'] ?> </h2>
     <form action="index.php?controller=usuario&action=store_two" method="POST">
         <div class="form-group">
             <label for="nombre_usuario">Nombre de Usuario:</label>
@@ -47,17 +47,21 @@
             <div class="form-group">
                 <label for="turno">Turno:</label>
                 <select class="form-control" id="turno" name="turno">
-                    <option value="1">Mañana</option>
-                    <option value="2">Tarde</option>
-                    <option value="3">Noche</option>
+                    <option value="" selected disabled>Selecciona un turno</option>
+                    <?php foreach($turnos as $turno): ?>
+
+                    <option value="<?php echo $turno['id_turno']?> "><?php echo $turno['nombre']?></option>
+                   <?php endforeach; ?>
                 </select>
             </div>
             <div class="form-group">
                 <label for="salon">Salón:</label>
+
                 <select class="form-control" id="salon" name="salon">
-                    <option value="1">A101</option>
-                    <option value="2">B202</option>
-                    <option value="3">C303</option>
+                <option value="" selected disabled>Selecciona un salon</option>
+                <?php foreach($salones as $salon): ?>
+                    <option value="<?php echo $salon['id_salon']?> "><?php echo $salon['nombre_salon']?></option>
+                <?php endforeach; ?>
                 </select>
             </div>
         </div>

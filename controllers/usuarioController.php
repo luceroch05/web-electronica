@@ -1,6 +1,10 @@
 <?php
 require_once 'models/usuario.php';
 require_once 'models/profesor.php';
+require_once 'models/asistente.php';
+
+require_once 'models/turno.php';
+require_once 'models/salon.php';
 
 class UsuarioController {
 
@@ -28,6 +32,9 @@ class UsuarioController {
             header('Location: index.php?controller=usuario&action=create');
             exit();
         }
+
+        $salones = Salon::all();
+        $turnos = Turno::all();
         $view = 'views/usuario/create-two.php';
         require_once 'views/layout.php';
     }
@@ -47,13 +54,15 @@ class UsuarioController {
 
     public function store_two() {
         session_start();
-
+    
+        // Verificar si hay un rol en la sesión
         if (!isset($_SESSION['id_rol'])) {
             // Si no hay rol en la sesión, redirigir a la página de creación inicial
             header('Location: index.php?controller=usuario&action=create');
             exit();
         }
-
+    
+        // Verificar si se está enviando un formulario POST
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Procesar datos del formulario de create-two.php
             $nombre_usuario = $_POST['nombre_usuario'];
@@ -61,52 +70,53 @@ class UsuarioController {
             $apellidos = $_POST['apellidos'];
             $password = $_POST['password'];
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
+            $id_rol = $_SESSION['id_rol'];
+            
+            // Preparar los datos comunes para la creación de usuario
             $data = [
                 'nombre_usuario' => $nombre_usuario,
                 'nombre' => $nombre,
                 'apellidos' => $apellidos,
                 'password' => $hashed_password,
-                'id_rol' => $_SESSION['id_rol']
+                'id_rol' => $id_rol
             ];
-
+    
+            // Crear el usuario y obtener el id generado
             $lastInsertId = Usuario::create($data);
-
-            // Si el rol es '2' (Asistente), guarda los datos adicionales
+    
+            // Determinar qué tipo de usuario se está creando
             if ($_SESSION['id_rol'] == '2') {
-                $id_usuario =   $lastInsertId;
+                
                 $turno = $_POST['turno'];
                 $salon = $_POST['salon'];
-
+    
                 $asistente_data = [
-                    'id_usuario' => $id_usuario,
+                    'id_usuario' => $lastInsertId,
                     'id_turno' => $turno,
                     'id_salon' => $salon
                 ];
-
+    
                 Asistente::create($asistente_data);
-            }
-            else{
-
-                $id_usuario =  $lastInsertId;
+            } else {
+                
+                // Si el rol no es '2', se asume que es un Profesor
                 $profesor_data = [
-                    'id_usuario' => $id_usuario
+                    'id_usuario' => $lastInsertId
                 ];
-
+    
                 Profesor::create($profesor_data);
-
-                header('Location: index.php?controller=usuario&action=index');
-
             }
-
-            // Limpiar los datos de la sesión
+    
+            // Limpiar los datos de la sesión después de la creación
             session_unset();
             session_destroy();
-
+    
+            // Redirigir al usuario a la página de lista de usuarios
             header('Location: index.php?controller=usuario&action=index');
             exit;
         }
     }
+    
 
     public function edit($id) {
         $usuario = Usuario::find($id);
