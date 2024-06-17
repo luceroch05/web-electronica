@@ -45,6 +45,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="index.php?controller=detalle_reserva_item&action=index">Detalle Reserva Item</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php?controller=asistente&action=index">Asistentes</a>
+                        </li>
                     </ul>
                 </div>
             </div>

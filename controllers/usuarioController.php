@@ -116,7 +116,7 @@ class UsuarioController {
             exit;
         }
     }
-    
+
 
     public function edit($id) {
         $usuario = Usuario::find($id);

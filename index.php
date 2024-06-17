@@ -11,6 +11,7 @@ require_once 'controllers/UbicacionController.php';
 require_once 'controllers/UnidadDidacticaController.php';
 require_once 'controllers/UsuarioController.php';
 require_once 'controllers/AuthController.php';
+require_once 'controllers/AsistenteController.php';
 
 
 $controller = isset($_GET['controller']) ? $_GET['controller'] : 'categoria';
@@ -53,6 +54,9 @@ switch ($controller) {
         break;
     case 'detalle_reserva_item':
         $controller = new DetalleReservaItemController();
+        break;
+    case 'asistente':
+        $controller = new asistenteController();
         break;
 
     case 'auth':

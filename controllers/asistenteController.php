@@ -1,23 +1,27 @@
 <?php
-require_once 'models/profesor.php';
+require_once 'models/asistente.php';
 require_once 'models/usuario.php';
+require_once 'models/turno.php';
 
-class ProfesorController {
+class AsistenteController {
 
     public function index() {
-        $profesores = Profesor::all();
+        $asistentes = Asistente::all();
 
-        $datos_profesores = [];
+        $datos_asistente= [];
 
-        foreach ($profesores as $profesor){
-            $usuario = Usuario::find($profesor['id_usuario']);
-
+        foreach ($asistentes as $asistente){
+            $usuario = Usuario::find($asistente['id_usuario']);
             if($usuario){
-                $datos_profesores[] = [
-                    'id_profesor' => $profesor['id_profesor'],
+
+                $turno = Turno::find($asistente['id_turno']);
+
+                $datos_asistente[] = [
+                    'id_asistente' => $asistente['id_asistente'],
                     'nombre_usuario' => $usuario['nombre_usuario'],
                     'nombre' => $usuario['nombre'],
                     'apellidos' => $usuario['apellidos'],
+                    'nombre_turno' => $turno['nombre'],
                 ];
             }
             else{
@@ -28,7 +32,7 @@ class ProfesorController {
 
 
 
-        $view = 'views/profesor/index.php';
+        $view = 'views/asistente/index.php';
         require_once 'views/layout.php';
     }
 

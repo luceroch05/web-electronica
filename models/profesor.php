@@ -11,6 +11,7 @@ class Profesor {
     public static function all() {
         $result = self::$conexion->query("SELECT * FROM profesor");
         return $result->fetch_all(MYSQLI_ASSOC);
+        
     }
 
     public static function find($id) {
