@@ -1,7 +1,7 @@
 
 <div class="container mt-5">
     <h2 class="mb-4">Lista de Profesores</h2>
-    <a href="index.php?controller=profesor&action=create" class="btn btn-primary mb-3">Agregar Profesor</a>
+    
     <ul class="list-group">
 
      

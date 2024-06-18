@@ -2,6 +2,7 @@
 require_once 'models/usuario.php';
 require_once 'models/profesor.php';
 require_once 'models/asistente.php';
+require_once 'models/rol.php';
 
 require_once 'models/turno.php';
 require_once 'models/salon.php';
@@ -10,6 +11,29 @@ class UsuarioController {
 
     public function index() {
         $usuarios = Usuario::all();
+
+        $datos_usuarios=[];
+
+        foreach ($usuarios as $usuario){
+            if($usuario){
+
+                $rol = Rol::find($usuario['id_rol']);
+
+                $datos_usuarios[] = [
+                    'id_usuario' => $usuario['id_usuario'],
+                    'nombre_usuario' => $usuario['nombre_usuario'],
+                    'nombre' => $usuario['nombre'],
+                    'apellidos' => $usuario['apellidos'],
+                    'rol' => $rol['nombre'],
+                ];
+            }
+            else{
+
+            }
+
+        }
+
+
         $view = 'views/usuario/index.php';
         require_once 'views/layout.php';
     }

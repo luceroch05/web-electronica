@@ -22,11 +22,15 @@ class UbicacionController {
     }
 
     public function store() {
+
+        
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
             $data = [
                 'id_salon' => $_POST['id_salon'],
                 'nombre_armario' => $_POST['nombre_armario']
             ];
+            
             Ubicacion::create($data);
             header('Location: index.php?controller=ubicacion&action=index');
             exit;

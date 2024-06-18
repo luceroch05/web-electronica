@@ -24,11 +24,10 @@ class UnidadDidacticaController {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $data = [
                 'nombre' => $_POST['nombre'],
-                'ciclo' => $_POST['ciclo'],
-                'id_profesor' => $_POST['id_profesor']
+                'ciclo' => $_POST['ciclo']
             ];
             UnidadDidactica::create($data);
-            header('Location: index.php?controller=unidadDidactica&action=index');
+            header('Location: index.php?controller=unidad_didactica&action=index');
             exit;
         }
     }
@@ -43,8 +42,7 @@ class UnidadDidacticaController {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $data = [
                 'nombre' => $_POST['nombre'],
-                'ciclo' => $_POST['ciclo'],
-                'id_profesor' => $_POST['id_profesor']
+                'ciclo' => $_POST['ciclo']
             ];
             UnidadDidactica::update($id, $data);
             header('Location: index.php?controller=unidadDidactica&action=index');

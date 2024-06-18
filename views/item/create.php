@@ -1,3 +1,11 @@
+<?php
+// Incluir los modelos necesarios y obtener los datos necesarios
+require_once 'models/salon.php'; 
+require_once 'models/ubicacion.php'; 
+$salones = Salon::all(); 
+$ubicaciones = Ubicacion::all();
+?>
+
 <div class="container">
     <h2>Crear Item</h2>
     <form action="index.php?controller=item&action=store" method="POST" enctype="multipart/form-data">
@@ -29,23 +37,74 @@
             <label for="imagen">Imagen:</label>
             <input type="file" class="form-control" id="imagen" name="imagen">
         </div>
+
         <div class="form-group">
-            <label for="id_ubicacion">Ubicación:</label>
-            <select class="form-control" id="id_ubicacion" name="id_ubicacion" required>
-                <!-- Opciones de ubicaciones deben ser añadidas aquí -->
+            <label for="id_salon">Salón:</label>
+            <select class="form-control" id="id_salon" name="id_salon" required onchange="cargarArmarios()">
+                <option value="" selected disabled>Selecciona</option>
+                <?php foreach ($salones as $salon): ?>
+                    <option value="<?php echo htmlspecialchars($salon['id_salon'], ENT_QUOTES, 'UTF-8'); ?>">
+                        <?php echo htmlspecialchars($salon['nombre_salon'], ENT_QUOTES, 'UTF-8'); ?>
+                    </option>
+                <?php endforeach; ?>
             </select>
         </div>
+
+        <div class="form-group" id="div_armario" style="display: none;">
+            <label for="id_armario">Armario:</label>
+            <select class="form-control" id="id_armario" name="id_armario" required>
+                <option value="" selected disabled>Selecciona un salón primero</option>
+            </select>
+        </div>
+
         <div class="form-group">
             <label for="nro_inventariado">Nro. Inventariado:</label>
             <input type="text" class="form-control" id="nro_inventariado" name="nro_inventariado" required>
         </div>
 
-
-        <div class="form-group">
-         
-
-            <input type="hidden" name="id_categoria" value="<?php echo $categoria_id; ?>">
-            </div>
+        <input type="hidden" name="id_categoria" value="<?php echo $categoria_id; ?>">
         <button type="submit" class="btn btn-primary">Crear Item</button>
     </form>
 </div>
+
+<script>
+function cargarArmarios() {
+    var idSalon = document.getElementById('id_salon').value;
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'obtener_armario.php?id_salon=' + encodeURIComponent(idSalon), true);
+
+    xhr.onload = function() {
+        if (xhr.status >= 200 && xhr.status < 400) {
+            var armarios = JSON.parse(xhr.responseText);
+            var selectArmarios = document.getElementById('id_armario');
+
+            // Limpiar opciones anteriores
+            selectArmarios.innerHTML = '';
+            // Agregar opción predeterminada
+            var option = document.createElement('option');
+            option.value = '';
+            option.textContent = 'Selecciona un armario';
+            selectArmarios.appendChild(option);
+
+            // Agregar las opciones de armarios obtenidas
+            armarios.forEach(function(ubicacion) {
+                var option = document.createElement('option');
+                option.value = ubicacion.id_ubicacion;
+                option.textContent = ubicacion.nombre_armario;
+                selectArmarios.appendChild(option);
+            });
+
+            // Mostrar el div de armarios si hay opciones disponibles
+            document.getElementById('div_armario').style.display = armarios.length > 0 ? 'block' : 'none';
+        } else {
+            console.error('Error al cargar los armarios. Estado HTTP: ' + xhr.status);
+        }
+    };
+
+    xhr.onerror = function() {
+        console.error('Error de red al cargar los armarios.');
+    };
+
+    xhr.send();
+}
+</script>

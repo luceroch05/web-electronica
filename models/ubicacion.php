@@ -37,6 +37,23 @@ class Ubicacion {
         $stmt->bind_param("i", $id);
         return $stmt->execute();
     }
+
+    public static function findBySalonId($id_salon){
+        $stmt = self::$conexion->prepare("SELECT * FROM ubicacion WHERE id_salon = ?");
+        $stmt->bind_param("i", $id_salon); // Debes bindear $id_salon, no $id
+        $stmt->execute();
+        $result = $stmt->get_result();
+    
+        // Verificar si hay resultados antes de devolver
+        if ($result->num_rows > 0) {
+            // Devolver todos los resultados (si esperas múltiples filas)
+            return $result->fetch_all(MYSQLI_ASSOC);
+        } else {
+            // Devolver un arreglo vacío si no hay resultados
+            return array();
+        }
+    }
+    
 }
 
 Ubicacion::init();

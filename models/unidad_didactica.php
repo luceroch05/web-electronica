@@ -21,14 +21,14 @@ class UnidadDidactica {
     }
 
     public static function create($data) {
-        $stmt = self::$conexion->prepare("INSERT INTO unidad_didactica (nombre, ciclo, id_profesor) VALUES (?, ?, ?)");
-        $stmt->bind_param("ssi", $data['nombre'], $data['ciclo'], $data['id_profesor']);
+        $stmt = self::$conexion->prepare("INSERT INTO unidad_didactica (nombre, ciclo) VALUES (?, ?)");
+        $stmt->bind_param("ss", $data['nombre'], $data['ciclo'], );
         return $stmt->execute();
     }
 
     public static function update($id, $data) {
-        $stmt = self::$conexion->prepare("UPDATE unidad_didactica SET nombre = ?, ciclo = ?, id_profesor = ? WHERE id_unidad_didactica = ?");
-        $stmt->bind_param("ssii", $data['nombre'], $data['ciclo'], $data['id_profesor'], $id);
+        $stmt = self::$conexion->prepare("UPDATE unidad_didactica SET nombre = ?, ciclo = ? WHERE id_unidad_didactica = ?");
+        $stmt->bind_param("ssi", $data['nombre'], $data['ciclo'], $id);
         return $stmt->execute();
     }
 
