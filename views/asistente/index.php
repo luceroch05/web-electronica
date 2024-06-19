@@ -18,8 +18,8 @@
                     <td><?php echo $asistente['nombre_turno']; ?></td>
 
                     <td>
-                        <a href="index.php?controller=profesor&action=edit&id=<?php echo $asistente['id_usuario']; ?>" class="btn btn-sm btn-warning">Editar</a>
-                        <a href="index.php?controller=profesor&action=delete&id=<?php echo $asistente['id_usuario']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro?')">Eliminar</a>
+                        <a href="index.php?controller=asistente&action=edit&id=<?php echo $asistente['id_usuario']; ?>" class="btn btn-sm btn-warning">Editar</a>
+                        <a href="index.php?controller=asistente&action=delete&id=<?php echo $asistente['id_usuario']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro?')">Eliminar</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

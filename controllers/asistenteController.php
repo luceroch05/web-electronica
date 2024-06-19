@@ -44,7 +44,7 @@ class AsistenteController {
     }
 
     public function create() {
-        $view = 'views/profesor/create.php';
+        $view = 'views/asistente/create.php';
         require_once 'views/layout.php';
     }
 
@@ -54,34 +54,44 @@ class AsistenteController {
                 'nombre' => $_POST['nombre']
             ];
             Asistente::create($data);
-            header('Location: index.php?controller=profesor&action=index');
+            header('Location: index.php?controller=asistente&action=index');
             exit;
         }
     }
 
     public function edit($id) {
         $usuario = Usuario::find($id);
+        $asistente = Asistente::findAsistenteByUsuarioId($usuario['id_usuario']); 
+        $turnos = Turno::all(); // Asume que tienes un modelo Turno con un método all() para obtener todos los turnos
 
-        $view = 'views/profesor/edit.php';
+        $view = 'views/asistente/edit.php';
         require_once 'views/layout.php';
     }
 
     public function update($id) {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $data = [
+            $data_usuario = [
                 'nombre_usuario' => $_POST['nombre_usuario'],
                 'nombre' => $_POST['nombre'],
-                'apellidos' => $_POST['apellidos']
+                'apellidos' => $_POST['apellidos'],
+               
             ];
-            Usuario::update($id, $data);
-            header('Location: index.php?controller=profesor&action=index');
+
+            $data_asistente = [
+                'id_salon' => $_POST['id_salon'],
+                'id_turno' => $_POST['id_turno'],
+            ]
+
+            Usuario::update($id, $data_usuario);
+            Asistente::updateByUsuarioId($id, $data_asistente  )
+            header('Location: index.php?controller=asistente&action=index');
             exit;
         }
     }
 
     public function delete($id) {
         Profesor::delete($id);
-        header('Location: index.php?controller=profesor&action=index');
+        header('Location: index.php?controller=asistente&action=index');
         exit;
     }
 }

@@ -37,7 +37,13 @@ class Asistente {
         $stmt->bind_param("i", $id_usuario);
         return $stmt->execute();
     }
-}
 
+    public static function findAsistenteByUsuarioId($id_usuario) {
+        $stmt = self::$conexion->prepare("SELECT * FROM asistente WHERE id_usuario = ?");
+        $stmt->bind_param("i", $id_usuario);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_assoc();
+}
+}
 Asistente::init();
 ?>
