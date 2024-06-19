@@ -30,9 +30,10 @@ class Usuario {
         return self::$conexion->insert_id;
     }
 
+    //no se puede actualizar la contraseña ni el rol desde aqui
     public static function update($id, $data) {
-        $stmt = self::$conexion->prepare("UPDATE usuario SET nombre_usuario = ?, nombre =?, apellidos=? , password = ?, id_rol = ? WHERE id_usuario = ?");
-        $stmt->bind_param("ssii", $data['nombre_usuario'],  $data['nombre'], $data['apellidos'], $data['password'], $data['id_rol'], $id);
+        $stmt = self::$conexion->prepare("UPDATE usuario SET nombre_usuario = ?, nombre =?, apellidos=? WHERE id_usuario = ?");
+        $stmt->bind_param("sssi", $data['nombre_usuario'],  $data['nombre'], $data['apellidos'], $id);
         return $stmt->execute();
     }
 

@@ -14,6 +14,8 @@ class ProfesorController {
 
             if($usuario){
                 $datos_profesores[] = [
+                    'id_usuario' => $usuario['id_usuario'],
+
                     'id_profesor' => $profesor['id_profesor'],
                     'nombre_usuario' => $usuario['nombre_usuario'],
                     'nombre' => $usuario['nombre'],
@@ -55,7 +57,7 @@ class ProfesorController {
     }
 
     public function edit($id) {
-        $profesor = Profesor::find($id);
+        $usuario = Usuario::find($id);
         $view = 'views/profesor/edit.php';
         require_once 'views/layout.php';
     }
@@ -63,9 +65,11 @@ class ProfesorController {
     public function update($id) {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $data = [
-                'nombre' => $_POST['nombre']
+                'nombre_usuario' => $_POST['nombre_usuario'],
+                'nombre' => $_POST['nombre'],
+                'apellidos' => $_POST['apellidos']
             ];
-            Profesor::update($id, $data);
+            Usuario::update($id, $data);
             header('Location: index.php?controller=profesor&action=index');
             exit;
         }

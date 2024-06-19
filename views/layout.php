@@ -26,9 +26,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="index.php?controller=prestamo&action=index">Préstamo</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.php?controller=profesor&action=index">Profesor</a>
-                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link" href="index.php?controller=reserva&action=index">Reserva</a>
                         </li>
@@ -41,13 +39,10 @@
                         <li class="nav-item">
                             <a class="nav-link" href="index.php?controller=usuario&action=index">Usuarios</a>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link" href="index.php?controller=detalle_reserva_item&action=index">Detalle Reserva Item</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.php?controller=asistente&action=index">Asistentes</a>
-                        </li>
+
                     </ul>
                 </div>
             </div>

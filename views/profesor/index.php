@@ -12,8 +12,8 @@
 
                 <?php echo $profesor['nombre']; ?>
                 <span>
-                    <a href="index.php?controller=profesor&action=edit&id=<?php echo $profesor['id_profesor']; ?>" class="btn btn-sm btn-warning">Editar</a>
-                    <a href="index.php?controller=profesor&action=delete&id=<?php echo $profesor['id_profesor']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro?')">Eliminar</a>
+                    <a href="index.php?controller=profesor&action=edit&id=<?php echo $profesor['id_usuario']; ?>" class="btn btn-sm btn-warning">Editar</a>
+                    <a href="index.php?controller=profesor&action=delete&id=<?php echo $profesor['id_usuario']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro?')">Eliminar</a>
                 </span>
 
 

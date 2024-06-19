@@ -17,6 +17,7 @@ class AsistenteController {
                 $turno = Turno::find($asistente['id_turno']);
 
                 $datos_asistente[] = [
+                    'id_usuario' => $asistente['id_usuario'],
                     'id_asistente' => $asistente['id_asistente'],
                     'nombre_usuario' => $usuario['nombre_usuario'],
                     'nombre' => $usuario['nombre'],
@@ -37,8 +38,8 @@ class AsistenteController {
     }
 
     public function show($id) {
-        $profesor = Profesor::find($id);
-        $view = 'views/profesor/show.php';
+        $profesor = Asistente::find($id);
+        $view = 'views/asistente/show.php';
         require_once 'views/layout.php';
     }
 
@@ -52,14 +53,15 @@ class AsistenteController {
             $data = [
                 'nombre' => $_POST['nombre']
             ];
-            Profesor::create($data);
+            Asistente::create($data);
             header('Location: index.php?controller=profesor&action=index');
             exit;
         }
     }
 
     public function edit($id) {
-        $profesor = Profesor::find($id);
+        $usuario = Usuario::find($id);
+
         $view = 'views/profesor/edit.php';
         require_once 'views/layout.php';
     }
@@ -67,9 +69,11 @@ class AsistenteController {
     public function update($id) {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $data = [
-                'nombre' => $_POST['nombre']
+                'nombre_usuario' => $_POST['nombre_usuario'],
+                'nombre' => $_POST['nombre'],
+                'apellidos' => $_POST['apellidos']
             ];
-            Profesor::update($id, $data);
+            Usuario::update($id, $data);
             header('Location: index.php?controller=profesor&action=index');
             exit;
         }
