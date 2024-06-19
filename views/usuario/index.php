@@ -2,6 +2,13 @@
     <h2>Lista de Usuarios</h2>
     <a href="index.php?controller=usuario&action=create" class="btn btn-success mb-3">Crear Usuario</a>
     <table class="table">
+<br>
+    <a class="btn btn-primary" href="index.php?controller=asistente&action=index"> Ver Asistentes</a> <br><br>
+ 
+    <a class="btn btn-primary"  href="index.php?controller=profesor&action=index">Ver Profesores</a>
+
+<!--
+    
         <thead>
             <tr>
                 <th>ID</th>
@@ -12,7 +19,7 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($datos_usuarios as $usuario): ?>
+            <?php /*foreach ($datos_usuarios as $usuario): ?>
             <tr>
                 <td><?php echo htmlspecialchars($usuario['id_usuario']); ?></td>
                 <td><?php echo htmlspecialchars($usuario['nombre']); ?></td>
@@ -25,7 +32,10 @@
                     </form>
                 </td>
             </tr>
-            <?php endforeach; ?>
+            <?php endforeach; */?>
         </tbody>
     </table>
+
+        -->
 </div>
+        

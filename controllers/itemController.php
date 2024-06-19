@@ -1,6 +1,7 @@
 <?php
 
 require_once 'models/item.php';
+require_once 'models/ubicacion.php';
 
 class ItemController {
 
@@ -98,5 +99,22 @@ class ItemController {
         header('Location: index.php?controller=item&action=index');
         exit;
     }
+
+    public function obtener_armario() {
+        header('Content-Type: application/json'); // Asegúrate de que la respuesta sea JSON
+        if (isset($_GET['id_salon'])) {
+            $id_salon = $_GET['id_salon'];
+            $ubicaciones = Ubicacion::findBySalonId($id_salon);
+            if ($ubicaciones !== false) {
+                echo json_encode($ubicaciones);
+            } else {
+                echo json_encode([]);
+            }
+        } else {
+            echo json_encode([]);
+        }
+    }
+
+
 }
 ?>

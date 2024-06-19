@@ -64,6 +64,8 @@ switch ($controller) {
             break;
 
 
+
+
     default:
         // Controlador predeterminado en caso de que no se proporcione uno válido en la URL
 }
@@ -84,6 +86,12 @@ switch ($action) {
         }
         break;
 
+        case 'obtener_armario':
+            if (method_exists($controller, 'obtener_armario')) {
+                $controller->obtener_armario();
+            }
+            break;         
+
     case 'create':
         $controller->create();
         break;
@@ -100,10 +108,11 @@ switch ($action) {
             // Aquí puedes redirigir a una página de error o hacer otra acción apropiada
         }
         break;
+
     case 'store':
         $controller->store();
         break;
-
+        
         case 'store_two':
             $controller->store_two();
             break;

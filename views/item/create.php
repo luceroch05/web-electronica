@@ -38,6 +38,8 @@ $ubicaciones = Ubicacion::all();
             <input type="file" class="form-control" id="imagen" name="imagen">
         </div>
 
+
+
         <div class="form-group">
             <label for="id_salon">Salón:</label>
             <select class="form-control" id="id_salon" name="id_salon" required onchange="cargarArmarios()">
@@ -57,6 +59,8 @@ $ubicaciones = Ubicacion::all();
             </select>
         </div>
 
+
+
         <div class="form-group">
             <label for="nro_inventariado">Nro. Inventariado:</label>
             <input type="text" class="form-control" id="nro_inventariado" name="nro_inventariado" required>
@@ -71,33 +75,39 @@ $ubicaciones = Ubicacion::all();
 function cargarArmarios() {
     var idSalon = document.getElementById('id_salon').value;
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'obtener_armario.php?id_salon=' + encodeURIComponent(idSalon), true);
+    xhr.open('GET', 'index.php?controller=item&action=obtener_armario&id_salon=' + encodeURIComponent(idSalon), true);
 
     xhr.onload = function() {
+        console.log("Response Text:", xhr.responseText); // Añadir esto para ver la respuesta
+
         if (xhr.status >= 200 && xhr.status < 400) {
-            var armarios = JSON.parse(xhr.responseText);
-            var selectArmarios = document.getElementById('id_armario');
+            try {
+                var armarios = JSON.parse(xhr.responseText);
+                var selectArmarios = document.getElementById('id_armario');
 
-            // Limpiar opciones anteriores
-            selectArmarios.innerHTML = '';
-            // Agregar opción predeterminada
-            var option = document.createElement('option');
-            option.value = '';
-            option.textContent = 'Selecciona un armario';
-            selectArmarios.appendChild(option);
-
-            // Agregar las opciones de armarios obtenidas
-            armarios.forEach(function(ubicacion) {
+                // Limpiar opciones anteriores
+                selectArmarios.innerHTML = '';
+                // Agregar opción predeterminada
                 var option = document.createElement('option');
-                option.value = ubicacion.id_ubicacion;
-                option.textContent = ubicacion.nombre_armario;
+                option.value = '';
+                option.textContent = 'Selecciona un armario';
                 selectArmarios.appendChild(option);
-            });
 
-            // Mostrar el div de armarios si hay opciones disponibles
-            document.getElementById('div_armario').style.display = armarios.length > 0 ? 'block' : 'none';
+                // Agregar las opciones de armarios obtenidas
+                armarios.forEach(function(ubicacion) {
+                    var option = document.createElement('option');
+                    option.value = ubicacion.id_ubicacion;
+                    option.textContent = ubicacion.nombre_armario;
+                    selectArmarios.appendChild(option);
+                });
+
+                // Mostrar el div de armarios si hay opciones disponibles
+                document.getElementById('div_armario').style.display = armarios.length > 0 ? 'block' : 'none';
+            } catch (e) {
+                console.error('Error parsing JSON:', e);
+            }
         } else {
-            console.error('Error al cargar los armarios. Estado HTTP: ' + xhr.status);
+            console.error('Error al cargar los armarios. Estado HTTP:', xhr.status);
         }
     };
 
