@@ -7,6 +7,8 @@
                 <th>Nombre</th>
                 <th>Usuario</th>
                 <th>Turno</th>
+                <th>Salón</th>
+
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -16,6 +18,7 @@
                     <td><?php echo $asistente['nombre']; ?></td>
                     <td><?php echo $asistente['nombre_usuario']; ?></td>
                     <td><?php echo $asistente['nombre_turno']; ?></td>
+                    <td><?php echo $asistente['id_salon']; ?></td>
 
                     <td>
                         <a href="index.php?controller=asistente&action=edit&id=<?php echo $asistente['id_usuario']; ?>" class="btn btn-sm btn-warning">Editar</a>

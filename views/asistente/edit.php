@@ -15,7 +15,7 @@
         </div>
         <div class="form-group">
             <label for="turno">Turno:</label>
-            <select class="form-control" id="id_turno" name="turno" required>
+            <select class="form-control" id="id_turno" name="id_turno" required>
                 <option value="" disabled>Selecciona un turno</option>
                 <?php foreach ($turnos as $turno): ?>
                     <option value="<?php echo $turno['id_turno']; ?>" <?php echo $turno['id_turno'] == $asistente['id_turno'] ? 'selected' : ''; ?>>
@@ -23,10 +23,22 @@
                     </option>
                 <?php endforeach; ?>
             </select>
+
+
+
+
+            
         </div>
         <div class="form-group">
             <label for="salon">Salón:</label>
-            <input type="text" class="form-control" id="salon" name="salon" value="<?php echo $asistente['id_salon']; ?>" required>
+            <select class="form-control" id="id_salon" name="id_salon" required>
+                <option value="" disabled>Selecciona un salón</option>
+                <?php foreach ($salones as $salon): ?>
+                    <option value="<?php echo $salon['id_salon']; ?>" <?php echo $salon['id_salon'] == $asistente['id_salon'] ? 'selected' : ''; ?>>
+                        <?php echo $salon['nombre_salon']; ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
         </div>
         <button type="submit" class="btn btn-primary">Actualizar Asistente</button>
     </form>

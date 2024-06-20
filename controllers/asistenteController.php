@@ -2,6 +2,7 @@
 require_once 'models/asistente.php';
 require_once 'models/usuario.php';
 require_once 'models/turno.php';
+require_once 'models/salon.php';
 
 class AsistenteController {
 
@@ -15,6 +16,7 @@ class AsistenteController {
             if($usuario){
 
                 $turno = Turno::find($asistente['id_turno']);
+                $salon = Salon::find($asistente['id_salon']);
 
                 $datos_asistente[] = [
                     'id_usuario' => $asistente['id_usuario'],
@@ -23,6 +25,7 @@ class AsistenteController {
                     'nombre' => $usuario['nombre'],
                     'apellidos' => $usuario['apellidos'],
                     'nombre_turno' => $turno['nombre'],
+                    'id_salon' => $salon['nombre_salon']
                 ];
             }
             else{
@@ -63,27 +66,28 @@ class AsistenteController {
         $usuario = Usuario::find($id);
         $asistente = Asistente::findAsistenteByUsuarioId($usuario['id_usuario']); 
         $turnos = Turno::all(); // Asume que tienes un modelo Turno con un método all() para obtener todos los turnos
-
+        $salones = Salon::all();
         $view = 'views/asistente/edit.php';
         require_once 'views/layout.php';
     }
 
     public function update($id) {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
+         
+            
             $data_usuario = [
                 'nombre_usuario' => $_POST['nombre_usuario'],
                 'nombre' => $_POST['nombre'],
-                'apellidos' => $_POST['apellidos'],
-               
+                'apellidos' => $_POST['apellidos']
             ];
 
             $data_asistente = [
                 'id_salon' => $_POST['id_salon'],
-                'id_turno' => $_POST['id_turno'],
-            ]
+                'id_turno' => $_POST['id_turno']
+            ];
 
             Usuario::update($id, $data_usuario);
-            Asistente::updateByUsuarioId($id, $data_asistente  )
+            Asistente::updateByUsuarioId($id, $data_asistente);
             header('Location: index.php?controller=asistente&action=index');
             exit;
         }

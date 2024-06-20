@@ -136,6 +136,12 @@ switch ($action) {
 
             $controller->login();
             break;
+
+        case'obtener_unidad_didactica':
+            if (method_exists($controller, 'obtener_unidad_didactica')) {
+                $controller->obtener_unidad_didactica();
+            }
+            break;   
     default:
 
         // Manejar casos de acción no válidos

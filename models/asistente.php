@@ -26,11 +26,12 @@ class Asistente {
         return $stmt->execute();
     }
 
+
     public static function updateByUsuarioId($id_usuario, $data) {
         $stmt = self::$conexion->prepare("UPDATE asistente SET id_turno = ?, id_salon = ? WHERE id_usuario = ?");
         $stmt->bind_param("iii", $data['id_turno'], $data['id_salon'], $id_usuario);
         return $stmt->execute();
-    }
+    }   
 
     public static function deleteByUsuarioId($id_usuario) {
         $stmt = self::$conexion->prepare("DELETE FROM asistente WHERE id_usuario = ?");

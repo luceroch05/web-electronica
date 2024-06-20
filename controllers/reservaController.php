@@ -2,6 +2,7 @@
 require_once 'models/item.php';
 
 require_once 'models/reserva.php';
+require_once 'models/unidad_didactica.php';
 
 class ReservaController {
 
@@ -19,6 +20,7 @@ class ReservaController {
 
     public function create() {
         $items = Item::all();
+        $unidades_didactica = UnidadDidactica::all();
 
         $view = 'views/reserva/create.php';
         require_once 'views/layout.php';
@@ -68,5 +70,21 @@ class ReservaController {
         header('Location: index.php?controller=reserva&action=index');
         exit;
     }
+
+    public function obtener_unidad_didactica() {
+        header('Content-Type: application/json');
+        if (isset($_GET['ciclo'])) {
+            $ciclo = $_GET['ciclo'];
+            $unidades_didactica = UnidadDidactica::findUnidadDidacticaByCiclo($ciclo);
+            if ($unidades_didactica !== false) {
+                echo json_encode($unidades_didactica);
+            } else {
+                echo json_encode([]);
+            }
+        } else {
+            echo json_encode([]);
+        }
+    }
+    
 }
 ?>

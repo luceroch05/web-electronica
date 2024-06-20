@@ -37,6 +37,26 @@ class UnidadDidactica {
         $stmt->bind_param("i", $id);
         return $stmt->execute();
     }
+
+
+    public static function findUnidadDidacticaByCiclo($ciclo) {
+        $stmt = self::$conexion->prepare("SELECT * FROM unidad_didactica WHERE ciclo = ?");
+        $stmt->bind_param("s", $ciclo);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        var_dump($stmt->error); // Check for any SQL errors
+        var_dump($result->num_rows); // Check number of rows returned
+        $unidadesDidacticas = [];
+
+        
+        while ($row = $result->fetch_assoc()) {
+            $unidadesDidacticas[] = $row;
+        }
+        
+        return $unidadesDidacticas;
+    }
+    
 }
 
 UnidadDidactica::init();

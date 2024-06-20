@@ -43,46 +43,111 @@
             </tbody>
         </table>
 
+        <div class="form-group">
+            <label for="ciclo">Ciclo:</label>
+            <select class="form-control" id="ciclo" name="ciclo" required onchange="cargarUnidadesDidacticas()">
+                <option value="" disabled>Selecciona ciclo</option>
+                <option value="I">I</option>
+                <option value="II">II</option>
+                <option value="III">III</option>
+                <option value="IV">IV</option>
+                <option value="V">V</option>
+                <option value="VI">VI</option>
+            </select>
+        </div>
+
+        <div class="form-group" id="div_unidad_didactica" style="display: none;">
+            <label for="unidad_didactica">Unidad Didactica:</label>
+            <select class="form-control" id="unidad_didactica" name="unidad_didactica" required>
+                <option value="" disabled>Selecciona una Unidad Didactica</option>
+                <!-- Las opciones se llenarán dinámicamente -->
+            </select>
+        </div>
+
         <button type="submit" class="btn btn-primary">Crear Reserva</button>
     </form>
 </div>
 
-
-
-
-
-
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
-    $(document).ready(function(){
-        $('#add-item').on('click', function(){
-            // Clonar la fila para agregar nuevos items
-            var newRow = '<tr>' +
-                '<td>' +
-                '<select class="form-control" name="item[]" required>' +
-                '<option value="" selected disabled>Selecciona un ítem</option>' +
-                '<?php foreach ($items as $item): ?>' +
-                '<option value="<?php echo $item['id_item']; ?>"><?php echo $item['descripcion']; ?></option>' +
-                '<?php endforeach; ?>' +
-                '</select>' +
-                '</td>' +
-                '<td>' +
-                '<input type="number" class="form-control" name="cantidad[]" min="1" required>' +
-                '</td>' +
-                '<td>' +
-                '<button type="button" class="btn btn-danger remove-item">Eliminar</button>' +
-                '</td>' +
-                '</tr>';
-            
-            // Agregar la nueva fila a la tabla
-            $('table tbody').append(newRow);
-        });
+function cargarUnidadesDidacticas() {
+    var ciclo = document.getElementById('ciclo').value;
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'index.php?controller=reserva&action=obtener_unidad_didactica&ciclo=' + encodeURIComponent(ciclo), true);
 
-        // Eliminar una fila de ítem
-        $(document).on('click', '.remove-item', function(){
-            $(this).closest('tr').remove();
-        });
-    });
+    xhr.onload = function() {
+
+        console.log("Response Text:", xhr.responseText); // Añadir esto para ver la respuesta
+
+        if (xhr.status >= 200 && xhr.status < 400) {
+            try {
+                var unidadesDidacticas = JSON.parse(xhr.responseText);
+                var selectUnidadDidactica = document.getElementById('unidad_didactica');
+                // Limpiar opciones anteriores
+                selectUnidadDidactica.innerHTML = '';
+                // Agregar opción predeterminada
+                var option = document.createElement('option');
+                option.value = '';
+                option.textContent = 'Selecciona una Unidad Didactica';
+                selectUnidadDidactica.appendChild(option);
+
+                // Agregar las opciones de unidades didácticas obtenidas
+                unidadesDidacticas.forEach(function(unidad) {
+                    var option = document.createElement('option');
+                    option.value = unidad.id_unidad_didactica;
+                    option.textContent = unidad.nombre;
+                    selectUnidadDidactica.appendChild(option);
+                });
+
+                // Mostrar el div de unidades didácticas si hay opciones disponibles
+                document.getElementById('div_unidad_didactica').style.display = unidadesDidacticas.length > 0 ? 'block' : 'none';
+            } catch (e) {
+                console.error('Error parsing JSON:', e);
+            }
+        } else {
+            console.error('Error al cargar las unidades didácticas. Estado HTTP:', xhr.status);
+        }
+    };
+
+    xhr.onerror = function() {
+        console.error('Error de red al cargar las unidades didácticas.');
+    };
+
+    xhr.send();
+}
+
+</script>
+
+
+<script>
+
+//para los itemsssss
+
+document.getElementById('add-item').addEventListener('click', function() {
+    var newRow = '<tr>' +
+        '<td>' +
+        '<select class="form-control" name="item[]" required>' +
+        '<option value="" selected disabled>Selecciona un ítem</option>' +
+        '<?php foreach ($items as $item): ?>' +
+        '<option value="<?php echo $item['id_item']; ?>"><?php echo $item['descripcion']; ?></option>' +
+        '<?php endforeach; ?>' +
+        '</select>' +
+        '</td>' +
+        '<td>' +
+        '<input type="number" class="form-control" name="cantidad[]" min="1" required>' +
+        '</td>' +
+        '<td>' +
+        '<button type="button" class="btn btn-danger remove-item">Eliminar</button>' +
+        '</td>' +
+        '</tr>';
+
+    document.querySelector('table tbody').insertAdjacentHTML('beforeend', newRow);
+});
+
+document.addEventListener('click', function(event) {
+    if (event.target.classList.contains('remove-item')) {
+        event.target.closest('tr').remove();
+    }
+});
 </script>
 </body>
 </html>
