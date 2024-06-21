@@ -4,7 +4,6 @@
     <table class="table">
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Nombre</th>
                 <th>Ciclo</th>
         
@@ -14,7 +13,6 @@
         <tbody>
             <?php foreach ($unidadesDidacticas as $unidadDidactica): ?>
             <tr>
-                <td><?php echo $unidadDidactica['id_unidad_didactica']; ?></td>
                 <td><?php echo $unidadDidactica['nombre']; ?></td>
                 <td><?php echo $unidadDidactica['ciclo']; ?></td>
                 <td>

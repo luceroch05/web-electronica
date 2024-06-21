@@ -1,6 +1,6 @@
 <div class="container">
     <h2>Lista de Items</h2>
-    <a href="index.php?controller=item&action=create&id_categoria=<?php echo $categoria_id; ?>" class="btn btn-success mb-3">Crear Item</a>
+    <a href="index.php?controller=item&action=create&id_categoria=<?php echo $id_categoria; ?>" class="btn btn-success mb-3">Crear Item</a>
     <table class="table">
         <thead>
             <tr>

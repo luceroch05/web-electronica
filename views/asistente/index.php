@@ -1,5 +1,5 @@
 <div class="container mt-5">
-    <h2 class="mb-4">Lista de Asistentes</h2>
+    <h2 >Lista de Asistentes</h2>
     
     <table class="table">
         <thead>

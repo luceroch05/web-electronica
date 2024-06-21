@@ -45,15 +45,17 @@ class UnidadDidacticaController {
                 'ciclo' => $_POST['ciclo']
             ];
             UnidadDidactica::update($id, $data);
-            header('Location: index.php?controller=unidadDidactica&action=index');
+            header('Location: index.php?controller=unidad_didactica&action=index');
             exit;
         }
     }
 
     public function delete($id) {
         UnidadDidactica::delete($id);
-        header('Location: index.php?controller=unidadDidactica&action=index');
+        header('Location: index.php?controller=unidad_didactica&action=index');
         exit;
     }
 }
+
+
 ?>

@@ -21,9 +21,9 @@ class ItemController {
     public function index() {
  // Obtener el parámetro de la categoría seleccionada
 
- $categoria_id = isset($_GET['id_categoria']) ? $_GET['id_categoria'] : null;
+ $id_categoria = isset($_GET['id_categoria']) ? $_GET['id_categoria'] : null;
  $view = 'views/item/index.php';
-    $items = Item::getItemsByCategoria($categoria_id);
+    $items = Item::getItemsByCategoria($id_categoria);
     require_once 'views/layout.php';
 
 
@@ -38,7 +38,7 @@ class ItemController {
 
 
     public function create() {
-        $categoria_id = isset($_GET['id_categoria']) ? $_GET['id_categoria'] : null;
+        $id_categoria = isset($_GET['id_categoria']) ? $_GET['id_categoria'] : null;
 
         $view = 'views/item/create.php';
         require_once 'views/layout.php';
@@ -46,22 +46,36 @@ class ItemController {
 
     public function store() {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+            $codigo_bci = $_POST['codigo_bci'];
+            $descripcion = $_POST['descripcion'];
+            $cantidad = $_POST['cantidad'];
+            $estado = $_POST['estado'];
+            $marca = $_POST['marca'];
+            $modelo = $_POST['modelo'];
+            $id_salon = $_POST['id_salon'];
+            $id_ubicacion = $_POST['id_armario'];
+            $nro_inventariado = $_POST['nro_inventariado'];
+            $id_categoria = $_POST['id_categoria'];
+            $imagen = $_FILES['imagen']['name'];
+
+
             $data = [
-                'codigo_bci' => $_POST['codigo_bci'],
-                'descripcion' => $_POST['descripcion'],
-                'cantidad' => $_POST['cantidad'],
-                'estado' => $_POST['estado'],
-                'marca' => $_POST['marca'],
-                'modelo' => $_POST['modelo'],
-                'imagen' => $_POST['imagen'],
-                'nro_inventariado' => $_POST['nro_inventariado'],
-                'id_ubicacion' => $_POST['id_ubicacion'],
-                'id_categoria' => $_POST['id_categoria']
+                'codigo_bci' => $codigo_bci,
+                'descripcion' => $descripcion,
+                'cantidad' => $cantidad,
+                'estado' => $estado,
+                'marca' => $marca,
+                'modelo' => $modelo,
+                'id_ubicacion' => $id_ubicacion,
+                'nro_inventariado' => $nro_inventariado,
+                'id_categoria' => $id_categoria,
+                'imagen' => $imagen
             ];
 
+            
             Item::create($data);
-
-            header('Location: index.php?controller=item&action=index');
+            header('Location: index.php?controller=item&action=index&id_categoria=<?php echo $id_categoria?>');
             exit;
         }
     }

@@ -66,7 +66,11 @@ $ubicaciones = Ubicacion::all();
             <input type="text" class="form-control" id="nro_inventariado" name="nro_inventariado" required>
         </div>
 
-        <input type="hidden" name="id_categoria" value="<?php echo $categoria_id; ?>">
+        <div class="form-group">
+            <label for="id_categoria">Categoría:</label>
+            <input type="text" class="form-control" id="id_categoria" name="id_categoria" value="<?php echo htmlspecialchars($id_categoria); ?>" readonly>
+        </div>
+        
         <button type="submit" class="btn btn-primary">Crear Item</button>
     </form>
 </div>

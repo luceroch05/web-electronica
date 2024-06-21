@@ -53,6 +53,20 @@ class Ubicacion {
             return array();
         }
     }
+
+
+    public static function findUbicacionByArmarioAndSalon($id_salon, $nombre_armario){
+
+        $stmt = self::$conexion->prepare("SELECT * FROM ubicacion WHERE id_salon = ? and nombre_armario=?");
+        $stmt->bind_param("is", $id_salon, $nombre_armario); 
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            return $result->fetch_all(MYSQLI_ASSOC);
+        } else {
+            return array();
+        }
+    }
     
 }
 

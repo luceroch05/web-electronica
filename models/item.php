@@ -22,7 +22,7 @@ class Item {
 
     public static function create($data) {
         $stmt = self::$conexion->prepare("INSERT INTO item (codigo_bci, descripcion, cantidad, estado, marca, modelo, imagen, id_ubicacion, nro_inventariado, id_categoria) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssissssssi", $data['codigo_bci'], $data['descripcion'], $data['cantidad'], $data['estado'], $data['marca'], $data['modelo'], $data['imagen'], $data['id_ubicacion'], $data['nro_inventariado'], $data['id_categoria']);
+        $stmt->bind_param("ssissssisi", $data['codigo_bci'], $data['descripcion'], $data['cantidad'], $data['estado'], $data['marca'], $data['modelo'], $data['imagen'], $data['id_ubicacion'], $data['nro_inventariado'], $data['id_categoria']);
         return $stmt->execute();
     }
 
