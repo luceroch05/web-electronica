@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -75,52 +76,51 @@ function cargarUnidadesDidacticas() {
     xhr.open('GET', 'index.php?controller=reserva&action=obtener_unidad_didactica&ciclo=' + encodeURIComponent(ciclo), true);
 
     xhr.onload = function() {
-
         console.log("Response Text:", xhr.responseText); // Añadir esto para ver la respuesta
 
         if (xhr.status >= 200 && xhr.status < 400) {
             try {
-                var unidadesDidacticas = JSON.parse(xhr.responseText);
-                var selectUnidadDidactica = document.getElementById('unidad_didactica');
-                // Limpiar opciones anteriores
-                selectUnidadDidactica.innerHTML = '';
-                // Agregar opción predeterminada
-                var option = document.createElement('option');
-                option.value = '';
-                option.textContent = 'Selecciona una Unidad Didactica';
-                selectUnidadDidactica.appendChild(option);
+                // Verifica que la respuesta no esté vacía antes de intentar analizarla
+                if (xhr.responseText.trim().length > 0) {
+                    var unidades = JSON.parse(xhr.responseText);
+                    var selectUnidades = document.getElementById('unidad_didactica');
 
-                // Agregar las opciones de unidades didácticas obtenidas
-                unidadesDidacticas.forEach(function(unidad) {
+                    // Limpiar opciones anteriores
+                    selectUnidades.innerHTML = '';
+                    // Agregar opción predeterminada
                     var option = document.createElement('option');
-                    option.value = unidad.id_unidad_didactica;
-                    option.textContent = unidad.nombre;
-                    selectUnidadDidactica.appendChild(option);
-                });
+                    option.value = '';
+                    option.textContent = 'Selecciona una unidad didactica';
+                    selectUnidades.appendChild(option);
 
-                // Mostrar el div de unidades didácticas si hay opciones disponibles
-                document.getElementById('div_unidad_didactica').style.display = unidadesDidacticas.length > 0 ? 'block' : 'none';
+                    // Agregar las opciones de unidades obtenidas
+                    unidades.forEach(function(unidad) {
+                        var option = document.createElement('option');
+                        option.value = unidad.id_unidad_didactica;
+                        option.textContent = unidad.nombre;
+                        selectUnidades.appendChild(option);
+                    });
+
+                    // Mostrar el div de unidades si hay opciones disponibles
+                    document.getElementById('div_unidad_didactica').style.display = unidades.length > 0 ? 'block' : 'none';
+                } else {
+                    console.error('Respuesta vacía del servidor.');
+                }
             } catch (e) {
                 console.error('Error parsing JSON:', e);
             }
         } else {
-            console.error('Error al cargar las unidades didácticas. Estado HTTP:', xhr.status);
+            console.error('Error al cargar las unidades didacticas. Estado HTTP:', xhr.status);
         }
     };
 
     xhr.onerror = function() {
-        console.error('Error de red al cargar las unidades didácticas.');
+        console.error('Error de red al cargar las unidades didacticas.');
     };
 
     xhr.send();
 }
 
-</script>
-
-
-<script>
-
-//para los itemsssss
 
 document.getElementById('add-item').addEventListener('click', function() {
     var newRow = '<tr>' +

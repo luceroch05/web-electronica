@@ -75,7 +75,7 @@ class ItemController {
 
             
             Item::create($data);
-            header('Location: index.php?controller=item&action=index&id_categoria=<?php echo $id_categoria?>');
+            header("Location: index.php?controller=item&action=index&id_categoria=" . $id_categoria);
             exit;
         }
     }
