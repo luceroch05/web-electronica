@@ -45,8 +45,7 @@ class UnidadDidactica {
         $stmt->execute();
         $result = $stmt->get_result();
 
-        var_dump($stmt->error); // Check for any SQL errors
-        var_dump($result->num_rows); // Check number of rows returned
+    
         $unidadesDidacticas = [];
 
         

@@ -3,6 +3,7 @@ require_once 'models/item.php';
 
 require_once 'models/reserva.php';
 require_once 'models/unidad_didactica.php';
+require_once 'models/detalle_reserva_item.php';
 
 class ReservaController {
 
@@ -28,17 +29,39 @@ class ReservaController {
 
     public function store() {
 
-        $items = Item::all();
-
-        
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+            $selectedItems = $_POST['items']; // Suponiendo que los items se envían como un array de IDs
+
             $data = [
-                'fecha_reserva' => $_POST['fecha_reserva'],
                 'fecha_prestamo' => $_POST['fecha_prestamo'],
-                'hora_reserva' => $_POST['hora_reserva'],
-                'id_profesor' => $_POST['id_profesor']
+                'id_unidad_didactica' => $_POST['unidad_didactica'],
+                'id_profesor' => $_POST['id_profesor'],
             ];
-            Reserva::create($data);
+    
+            // Crear la reserva
+            $reserva = Reserva::create($data);
+
+
+            foreach ($selectedItems as $itemId) {
+
+                $itemsPedidos = Item::find($itemId);
+                $id_ubicacion = $itemsPedidos['id_ubicacion'];
+                $ubicacion = Ubicacion::find($id_ubicacion);
+                $id_salon = Salon::find($ubicacion['id_salon']);
+                
+            
+
+
+                // Crear un nuevo detalle_reserva_item para cada item seleccionado
+                DetalleReservaItem::create([
+
+                    'reserva_id' => $reserva->id,
+                    'item_id' => $itemId,
+                ]);
+            }
+
+
 
             header('Location: index.php?controller=reserva&action=index');
             exit;
@@ -75,9 +98,9 @@ class ReservaController {
         header('Content-Type: application/json');
         if (isset($_GET['ciclo'])) {
             $ciclo = $_GET['ciclo'];
-            $unidades_didactica = UnidadDidactica::findUnidadDidacticaByCiclo($ciclo);
-            if ($unidades_didactica !== false) {
-                echo json_encode($unidades_didactica);
+            $unidades = UnidadDidactica::findUnidadDidacticaByCiclo($ciclo);
+            if ($unidades !== false) {
+                echo json_encode($unidades);
             } else {
                 echo json_encode([]);
             }
