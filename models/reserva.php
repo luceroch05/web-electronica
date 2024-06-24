@@ -21,14 +21,15 @@ class Reserva {
     }
 
     public static function create($data) {
-        $stmt = self::$conexion->prepare("INSERT INTO reserva (fecha_prestamo, id_profesor, id_unidad_didactica, id_asistente) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("siii", $data['fecha_prestamo'], $data['id_profesor'], $data['id_unidad_didactica'], $data['id_asistente']);
-        return $stmt->execute();
+        $stmt = self::$conexion->prepare("INSERT INTO reserva (fecha_prestamo, id_profesor, id_unidad_didactica, id_turno) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("siii", $data['fecha_prestamo'], $data['id_profesor'], $data['id_unidad_didactica'], $data['id_turno']);
+        $stmt->execute();
+        return self::$conexion->insert_id;  // Devolver el ID de la reserva creada
     }
 
     public static function update($id, $data) {
-        $stmt = self::$conexion->prepare("UPDATE reserva SET fecha_prestamo = ?, id_profesor = ?, id_unidad_didactica = ?, id_asistente = ? WHERE id_reserva = ?");
-        $stmt->bind_param("siiii", $data['fecha_prestamo'], $data['id_profesor'], $data['id_unidad_didactica'], $data['id_asistente'], $id);
+        $stmt = self::$conexion->prepare("UPDATE reserva SET fecha_prestamo = ?, id_profesor = ?, id_unidad_didactica = ?, id_turno = ? WHERE id_reserva = ?");
+        $stmt->bind_param("siiii", $data['fecha_prestamo'], $data['id_profesor'], $data['id_unidad_didactica'], $data['id_turno'], $id);
         return $stmt->execute();
     }
 

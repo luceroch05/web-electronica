@@ -21,14 +21,14 @@ class DetalleReservaItem {
     }
 
     public static function create($data) {
-        $stmt = self::$conexion->prepare("INSERT INTO detalle_reserva_item (id_reserva, id_item) VALUES (?, ?)");
-        $stmt->bind_param("ii", $data['id_reserva'], $data['id_item']);
+        $stmt = self::$conexion->prepare("INSERT INTO detalle_reserva_item (id_reserva, id_item, fecha_reserva, hora_reserva) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("iiss", $data['id_reserva'], $data['id_item'], $data['fecha_reserva'], $data['hora_reserva']);
         return $stmt->execute();
     }
 
     public static function update($id, $data) {
-        $stmt = self::$conexion->prepare("UPDATE detalle_reserva_item SET id_reserva = ?, id_item = ? WHERE id_detalle = ?");
-        $stmt->bind_param("iii", $data['id_reserva'], $data['id_item'], $id);
+        $stmt = self::$conexion->prepare("UPDATE detalle_reserva_item SET id_reserva = ?, id_item = ?, fecha_reserva = ?, hora_reserva = ? WHERE id_detalle = ?");
+        $stmt->bind_param("iissi", $data['id_reserva'], $data['id_item'], $data['fecha_reserva'], $data['hora_reserva'], $id);
         return $stmt->execute();
     }
 
@@ -40,4 +40,5 @@ class DetalleReservaItem {
 }
 
 DetalleReservaItem::init();
+
 ?>

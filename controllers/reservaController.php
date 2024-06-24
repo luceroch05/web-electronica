@@ -1,15 +1,15 @@
 <?php
 require_once 'models/item.php';
-
 require_once 'models/reserva.php';
 require_once 'models/unidad_didactica.php';
 require_once 'models/detalle_reserva_item.php';
+require_once 'models/turno.php';
 
 class ReservaController {
 
     public function index() {
         $reservas = Reserva::all();
-        $view = 'views/reservA/index.php';
+        $view = 'views/reserva/index.php';
         require_once 'views/layout.php';
     }
 
@@ -22,46 +22,40 @@ class ReservaController {
     public function create() {
         $items = Item::all();
         $unidades_didactica = UnidadDidactica::all();
+        $profesores = Profesor::all();
+        $turnos = Turno::all();
 
+        
         $view = 'views/reserva/create.php';
         require_once 'views/layout.php';
     }
 
     public function store() {
-
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-            $selectedItems = $_POST['items']; // Suponiendo que los items se envían como un array de IDs
+            $selectedItems = $_POST['item'];
 
             $data = [
                 'fecha_prestamo' => $_POST['fecha_prestamo'],
                 'id_unidad_didactica' => $_POST['unidad_didactica'],
                 'id_profesor' => $_POST['id_profesor'],
+                'id_turno' => $_POST['id_turno'],
             ];
-    
-            // Crear la reserva
-            $reserva = Reserva::create($data);
 
+            // Crear la reserva
+            $reservaId = Reserva::create($data);
+
+            $fecha_reserva = date('Y-m-d');
+            $hora_reserva = date('H:i:s');
 
             foreach ($selectedItems as $itemId) {
-
-                $itemsPedidos = Item::find($itemId);
-                $id_ubicacion = $itemsPedidos['id_ubicacion'];
-                $ubicacion = Ubicacion::find($id_ubicacion);
-                $id_salon = Salon::find($ubicacion['id_salon']);
-                
-            
-
-
                 // Crear un nuevo detalle_reserva_item para cada item seleccionado
                 DetalleReservaItem::create([
-
-                    'reserva_id' => $reserva->id,
-                    'item_id' => $itemId,
+                    'id_reserva' => $reservaId,
+                    'id_item' => $itemId,
+                    'fecha_reserva' => $fecha_reserva,
+                    'hora_reserva' => $hora_reserva,
                 ]);
             }
-
-
 
             header('Location: index.php?controller=reserva&action=index');
             exit;
@@ -80,7 +74,7 @@ class ReservaController {
                 'fecha_reserva' => $_POST['fecha_reserva'],
                 'fecha_prestamo' => $_POST['fecha_prestamo'],
                 'hora_reserva' => $_POST['hora_reserva'],
-                'id_profesor' => $_POST['id_profesor']
+                'id_profesor' => $_POST['id_profesor'],
             ];
             Reserva::update($id, $data);
             header('Location: index.php?controller=reserva&action=index');
@@ -108,7 +102,6 @@ class ReservaController {
             echo json_encode([]);
         }
     }
-    
-    
 }
+
 ?>

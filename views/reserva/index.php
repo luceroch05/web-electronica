@@ -5,9 +5,8 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Fecha de Reserva</th>
-                <th>Fecha de Préstamo</th>
-                <th>Hora de Reserva</th>
+                <th>Fecha de Prestamo</th>
+
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -15,9 +14,7 @@
             <?php foreach ($reservas as $reserva): ?>
             <tr>
                 <td><?php echo $reserva['id_reserva']; ?></td>
-                <td><?php echo $reserva['fecha_reserva']; ?></td>
                 <td><?php echo $reserva['fecha_prestamo']; ?></td>
-                <td><?php echo $reserva['hora_reserva']; ?></td>
                 <td>
                     <a href="index.php?controller=reserva&action=edit&id=<?php echo $reserva['id_reserva']; ?>" class="btn btn-primary">Editar</a>
                     <form action="index.php?controller=reserva&action=delete&id=<?php echo $reserva['id_reserva']; ?>" method="POST" style="display: inline-block;">

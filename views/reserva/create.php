@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,7 +29,7 @@
                         <select class="form-control" id="item" name="item[]" required>
                             <option value="" selected disabled>Selecciona un ítem</option>
                             <?php foreach ($items as $item): ?>
-                                <option value="<?php echo $item['id_item']; ?>"><?php echo $item['descripcion']; ?></option>
+                                <option value="<?php echo $item['id_item']; ?>"><?php echo htmlspecialchars($item['descripcion'], ENT_QUOTES, 'UTF-8'); ?></option>
                             <?php endforeach; ?>
                         </select>
                     </td>
@@ -47,7 +46,7 @@
         <div class="form-group">
             <label for="ciclo">Ciclo:</label>
             <select class="form-control" id="ciclo" name="ciclo" required onchange="cargarUnidadesDidacticas()">
-                <option value="" disabled>Selecciona ciclo</option>
+                <option value="" disabled selected>Selecciona ciclo</option>
                 <option value="I">I</option>
                 <option value="II">II</option>
                 <option value="III">III</option>
@@ -58,10 +57,34 @@
         </div>
 
         <div class="form-group" id="div_unidad_didactica" style="display: none;">
-            <label for="unidad_didactica">Unidad Didactica:</label>
+            <label for="unidad_didactica">Unidad Didáctica:</label>
             <select class="form-control" id="unidad_didactica" name="unidad_didactica" required>
-                <option value="" disabled>Selecciona una Unidad Didactica</option>
+                <option value="" disabled selected>Selecciona una Unidad Didáctica</option>
                 <!-- Las opciones se llenarán dinámicamente -->
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="id_profesor">Profesor:</label>
+            <select class="form-control" id="id_profesor" name="id_profesor" required>
+                <option value="" selected disabled>Selecciona un profesor</option>
+                <?php foreach ($profesores as $profesor): ?>
+                    <option value="<?php echo htmlspecialchars($profesor['id_profesor'], ENT_QUOTES, 'UTF-8'); ?>">
+                        <?php echo htmlspecialchars($profesor['id_usuario'], ENT_QUOTES, 'UTF-8'); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="id_turno">Turno:</label>
+            <select class="form-control" id="id_turno" name="id_turno" required>
+                <option value="" selected disabled>Para qué turno lo desea</option>
+                <?php foreach ($turnos as $turno): ?>
+                    <option value="<?php echo htmlspecialchars($turno['id_turno'], ENT_QUOTES, 'UTF-8'); ?>">
+                        <?php echo htmlspecialchars($turno['nombre'], ENT_QUOTES, 'UTF-8'); ?>
+                    </option>
+                <?php endforeach; ?>
             </select>
         </div>
 
@@ -121,14 +144,13 @@ function cargarUnidadesDidacticas() {
     xhr.send();
 }
 
-
 document.getElementById('add-item').addEventListener('click', function() {
     var newRow = '<tr>' +
         '<td>' +
         '<select class="form-control" name="item[]" required>' +
         '<option value="" selected disabled>Selecciona un ítem</option>' +
         '<?php foreach ($items as $item): ?>' +
-        '<option value="<?php echo $item['id_item']; ?>"><?php echo $item['descripcion']; ?></option>' +
+        '<option value="<?php echo htmlspecialchars($item['id_item'], ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($item['descripcion'], ENT_QUOTES, 'UTF-8'); ?></option>' +
         '<?php endforeach; ?>' +
         '</select>' +
         '</td>' +
